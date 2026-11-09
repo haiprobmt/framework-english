@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FrameWork English</title>
+<script>(function(){var t="light";try{var v=JSON.parse(localStorage.getItem("framework-english-theme"));if(v==="dark"||v==="system")t=v;}catch(e){}if(t!=="system")document.documentElement.setAttribute("data-theme",t);})();</script>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#F2F3EF" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0F151B" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" id="theme-color" content="#FFFFFF">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="description" content="Sentence frames, pronunciation and an AI conversation partner for professional English.">
 <link rel="icon" type="image/png" href="icons/icon-192.png">
@@ -17,10 +17,10 @@
 <style>
 :root{
   /* Layout: sticky top bar, single 1120px workspace; library in three situation columns. */
-  --paper:#F2F3EF; --surface:#FFFFFF; --ink:#16202A; --muted:#5A6470; --line:#D8DCD5;
-  --accent:#1E5A87; --accent-ink:#FFFFFF;
-  --s0:#2F6F9F; --s1:#B5562F; --s2:#3E7D52; --s3:#8A4F7D; --s4:#9A7300;
-  --good:#2E7D4F; --warn:#A86A00; --bad:#B23B3B;
+  --paper:#F6F7FB; --surface:#FFFFFF; --ink:#1D2433; --muted:#667085; --line:#E5E8EF;
+  --accent:#3366E6; --accent-ink:#FFFFFF;
+  --s0:#3366E6; --s1:#E0663A; --s2:#1E9E6A; --s3:#9B51E0; --s4:#C98A00;
+  --good:#12805C; --warn:#B76E00; --bad:#D14343;
   --display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
   --body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
   --frame:'IBM Plex Serif',Georgia,'Times New Roman',serif;
@@ -29,17 +29,17 @@
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --paper:#0F151B; --surface:#18212A; --ink:#E7EBEF; --muted:#9AA5B1; --line:#2B3641;
-    --accent:#7DB4E0; --accent-ink:#0F151B;
-    --s0:#7FB3DD; --s1:#E8916C; --s2:#7FC092; --s3:#CF95C2; --s4:#DDB84A;
-    --good:#6CC28F; --warn:#E0A84A; --bad:#EE7B7B; color-scheme:dark;
+    --paper:#11161F; --surface:#1A2130; --ink:#E9EDF5; --muted:#A0A9BA; --line:#2A3345;
+    --accent:#86A8FF; --accent-ink:#11161F;
+    --s0:#86A8FF; --s1:#F49A74; --s2:#5CCB9A; --s3:#C59BF0; --s4:#E6BC4A;
+    --good:#5CCB9A; --warn:#E6BC4A; --bad:#F28B8B; color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --paper:#0F151B; --surface:#18212A; --ink:#E7EBEF; --muted:#9AA5B1; --line:#2B3641;
-  --accent:#7DB4E0; --accent-ink:#0F151B;
-  --s0:#7FB3DD; --s1:#E8916C; --s2:#7FC092; --s3:#CF95C2; --s4:#DDB84A;
-  --good:#6CC28F; --warn:#E0A84A; --bad:#EE7B7B; color-scheme:dark;
+  --paper:#11161F; --surface:#1A2130; --ink:#E9EDF5; --muted:#A0A9BA; --line:#2A3345;
+  --accent:#86A8FF; --accent-ink:#11161F;
+  --s0:#86A8FF; --s1:#F49A74; --s2:#5CCB9A; --s3:#C59BF0; --s4:#E6BC4A;
+  --good:#5CCB9A; --warn:#E6BC4A; --bad:#F28B8B; color-scheme:dark;
 }
 *{box-sizing:border-box}
 [hidden]{display:none !important}
@@ -437,13 +437,98 @@ q{font-family:var(--frame);font-style:italic}
   .card-head .letter.big{width:52px;height:52px;font-size:28px}
   .bar-row{grid-template-columns:90px 1fr 36px}
 }
+/* ===== v4: lighter, phone-first look ===== */
+.panel{border-radius:16px;border-color:var(--line);box-shadow:0 1px 2px rgba(16,24,40,.04),0 2px 8px -4px rgba(16,24,40,.06)}
+.top{background:color-mix(in srgb,var(--surface) 88%,transparent);border-bottom-color:var(--line)}
+.letter{background:color-mix(in srgb,var(--accent) 12%,var(--surface));color:var(--accent)}
+.avatar{background:color-mix(in srgb,var(--accent) 14%,var(--surface));color:var(--accent)}
+.fchip.on{background:color-mix(in srgb,var(--accent) 12%,var(--surface));color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.btn{border-radius:11px}
+.btn.ghost{border-color:transparent;background:color-mix(in srgb,var(--accent) 8%,var(--surface));color:var(--accent);font-weight:600}
+.btn.ghost:hover:not(:disabled){border-color:color-mix(in srgb,var(--accent) 35%,transparent)}
+.tile,.phr,.scen,.lv-chip,.rrow{border-radius:14px}
+.tabs{border-bottom-color:var(--line)}
+.msg.me .bubble{background:color-mix(in srgb,var(--accent) 10%,var(--surface))}
+.seg-ctl button[aria-checked="true"]{background:color-mix(in srgb,var(--accent) 12%,var(--surface));color:var(--accent)}
+
+/* home */
+.home-head h1{font-size:clamp(28px,4.4vw,44px)}
+.home-head .eyebrow{margin-bottom:6px}
+.today-card{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:18px 20px;border-radius:18px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 14%,var(--surface)),color-mix(in srgb,var(--s3) 9%,var(--surface)));border:1px solid color-mix(in srgb,var(--accent) 18%,transparent)}
+.today-card > div{flex:1;min-width:200px}
+.tc-k{margin:0;font:700 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.tc-v{margin:6px 0 2px;font:700 22px/1.2 var(--display)}
+.tc-sub{margin:0;color:var(--muted);font-size:14.5px}
+.sec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.sec-tile{display:flex;flex-direction:column;gap:4px;padding:16px;border-radius:18px;background:var(--surface);border:1px solid var(--line);text-decoration:none;color:var(--ink);box-shadow:0 1px 2px rgba(16,24,40,.04)}
+.sec-tile:hover{border-color:color-mix(in srgb,var(--tc) 50%,transparent)}
+.sec-ico{display:grid;place-items:center;width:44px;height:44px;border-radius:13px;background:color-mix(in srgb,var(--tc) 13%,var(--surface));color:var(--tc);margin-bottom:8px}
+.sec-ico svg{width:23px;height:23px}
+.sec-t{font:700 17px/1.2 var(--display)}
+.sec-s{font-size:13.5px;color:var(--muted);line-height:1.35}
+.sec-p{margin-top:auto;padding-top:10px;font-size:12.5px;color:var(--muted)}
+.sec-bar{display:block;height:5px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:6px}
+.sec-bar span{display:block;height:100%;background:var(--tc)}
+.home-cont{display:flex;flex-direction:column;gap:10px}
+.home-cont .tiles{margin:0}
+
+/* bottom tab bar + More sheet (phones) */
+.tabbar{display:none}
+.sheet{position:fixed;inset:0;z-index:30;background:rgba(15,20,32,.35);display:flex;align-items:flex-end;justify-content:center}
+.sheet-card{width:100%;max-width:560px;background:var(--surface);border-radius:20px 20px 0 0;padding:10px 16px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -8px 30px rgba(0,0,0,.12)}
+.sheet-grip{width:40px;height:5px;border-radius:3px;background:var(--line);margin:4px auto 12px}
+.sheet-list{list-style:none;margin:0;padding:0}
+.sheet-list a,.sheet-list button{display:flex;align-items:center;gap:12px;width:100%;padding:13px 6px;border:0;background:none;color:var(--ink);font:500 16px/1.2 var(--body);text-decoration:none;cursor:pointer;border-bottom:1px solid var(--line);text-align:left}
+.sheet-list li:last-child a,.sheet-list li:last-child button{border-bottom:0}
+.sheet-list svg{width:21px;height:21px;color:var(--muted);flex:none}
+.sheet-list .end{margin-left:auto;color:var(--muted);font-size:14px}
+.sheet .seg-ctl{width:100%;display:flex}
+.sheet .seg-ctl button{flex:1}
+.sheet h3{font:700 12px/1 var(--body);text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:16px 6px 8px}
+.switch{width:40px;height:24px;border-radius:12px;background:var(--line);position:relative;flex:none;margin-left:auto;transition:background .15s}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:left .15s}
+[aria-pressed="true"] .switch{background:var(--accent)}
+[aria-pressed="true"] .switch::after{left:19px}
+
+@media (max-width: 900px){ .sec-grid{grid-template-columns:1fr 1fr} }
+@media (max-width: 720px){
+  .top nav,#voice-btn,#ipa-toggle,.sync{display:none !important}
+  .top{padding:10px 16px;min-height:52px}
+  .brand{font-size:21px}
+  main{padding:16px 14px calc(96px + env(safe-area-inset-bottom));gap:18px}
+  h1{font-size:28px;letter-spacing:-.02em}
+  .page-head h1,.card-head h1{font-size:26px}
+  .lede{font-size:15px;margin-top:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .eyebrow{font-size:11px}
+  .panel{padding:16px;border-radius:16px}
+  .h3{font-size:17px}
+  .sec-grid{gap:10px}
+  .sec-tile{padding:14px;border-radius:16px}
+  .sec-ico{width:40px;height:40px;border-radius:12px;margin-bottom:6px}
+  .tc-v{font-size:19px}
+  .today-card{padding:16px;border-radius:16px}
+  .today-card .btn{flex:1 0 100%;justify-content:center}
+  .tabs button{padding:11px 10px;font-size:14.5px}
+  .frame{font-size:18px}
+  .card-head{gap:12px}
+  .composer{bottom:calc(74px + env(safe-area-inset-bottom))}
+  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+  .tabbar a,.tabbar button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0;border:0;background:none;color:var(--muted);font:600 11px/1.1 var(--body);text-decoration:none;cursor:pointer;position:relative}
+  .tabbar .ti{display:grid;place-items:center;width:52px;height:30px;border-radius:15px}
+  .tabbar svg{width:22px;height:22px}
+  .tabbar [aria-current="page"]{color:var(--accent)}
+  .tabbar [aria-current="page"] .ti{background:color-mix(in srgb,var(--accent) 13%,var(--surface))}
+  .tabbar .badge{position:absolute;top:0;left:calc(50% + 8px)}
+}
+
 </style>
 </head>
 <body>
 <header class="top">
   <a href="#library" class="brand">Frame<b>Work</b></a>
   <nav aria-label="Main">
-    <a href="#library" data-nav="library">Library</a>
+    <a href="#library" data-nav="library">Home</a>
+    <a href="#frames" data-nav="frames">Frame cards</a>
     <a href="#partner" data-nav="partner">AI partner</a>
     <a href="#phrases" data-nav="phrases">Phrases</a>
     <a href="#natural" data-nav="natural">Natural English</a>
@@ -465,6 +550,28 @@ q{font-family:var(--frame);font-style:italic}
   </div>
 </header>
 <main id="app"></main>
+<nav class="tabbar" aria-label="Sections">
+  <a href="#library" data-tab-nav="library"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></svg></span>Home</a>
+  <a href="#partner" data-tab-nav="partner"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg></span>Partner</a>
+  <a href="#phrases" data-tab-nav="phrases"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M9 7h6M9 11h6"/></svg></span>Phrases</a>
+  <a href="#natural" data-tab-nav="natural"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span>Natural</a>
+  <button type="button" id="more-btn" data-tab-nav="more" aria-expanded="false" aria-controls="more-sheet"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/></svg></span>More<span class="badge" id="more-badge"></span></button>
+</nav>
+<div class="sheet" id="more-sheet" hidden>
+  <div class="sheet-card" role="dialog" aria-label="More">
+    <div class="sheet-grip" aria-hidden="true"></div>
+    <ul class="sheet-list">
+      <li><a href="#frames" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 9h10M7 13h6"/><path d="M7 17h3"/></svg>Frame cards</a></li>
+      <li><a href="#review" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 8v4l3 2"/></svg>Review<span class="end" id="sheet-due"></span></a></li>
+      <li><a href="#radar" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Repetition radar</a></li>
+      <li><button type="button" id="sheet-ipa" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V5h16v2"/><path d="M12 5v10"/><path d="M8 19h8"/><path d="M9 15h6"/></svg>Pronunciation (IPA) under words<span class="switch" aria-hidden="true"></span></button></li>
+      <li><button type="button" id="sheet-voice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>Partner voice<span class="end" id="sheet-voice-name"></span></button></li>
+      <li><a href="#settings" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Settings</a></li>
+    </ul>
+    <h3>Appearance</h3>
+    <span class="seg-ctl" role="radiogroup" aria-label="Appearance"><button role="radio" data-theme-set="light">Light</button><button role="radio" data-theme-set="dark">Dark</button><button role="radio" data-theme-set="system">Match phone</button></span>
+  </div>
+</div>
 
 <script>
 /* ---------------- content ---------------- */
@@ -748,6 +855,7 @@ async function initDb(){
 }
 /* initSample is defined with the Claude API code below */
 
+const ICONS = {"chat": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z\"/><path d=\"M8.5 11h.01M12 11h.01M15.5 11h.01\"/></svg>", "frame": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"16\" rx=\"3\"/><path d=\"M7 9h10M7 13h6\"/><path d=\"M7 17h3\"/></svg>", "book": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z\"/><path d=\"M4 19V5\"/><path d=\"M9 7h6M9 11h6\"/></svg>", "quote": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 5h16v11H9l-5 4z\"/><path d=\"M8 9h8M8 12h5\"/></svg>"};
 /* ---------------- helpers ---------------- */
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
@@ -760,7 +868,7 @@ const cardHref = c => "#card-" + c.id.toLowerCase();
 const DAY = 864e5;
 
 /* pronunciation */
-let pronOn = lsGet("framework-english-ipa") !== false;
+let pronOn = (() => { const v = lsGet("framework-english-ipa"); if(v === true || v === false) return v; return !(window.matchMedia && window.matchMedia("(max-width: 720px)").matches); })();
 const fmtIPA = s => esc(s).replace(/ˈ/g, '<span class="st">ˈ</span>');
 function wordStack(tok, extra){
   const m = tok.match(/^([^A-Za-z0-9]*)([A-Za-z0-9][A-Za-z0-9'’.%-]*[A-Za-z0-9%]|[A-Za-z0-9])?([^A-Za-z0-9%]*)$/);
@@ -800,9 +908,27 @@ function status(c){
 const dueCards = () => CARDS.filter(c => { const p = P(c); return p.box > 0 && p.due <= Date.now(); });
 function setNav(which){
   document.querySelectorAll("[data-nav]").forEach(a => { if(a.dataset.nav === which) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+  const tabWhich = ["library", "partner", "phrases", "natural"].includes(which) ? which : ["review", "radar", "settings"].includes(which) ? "more" : "library";
+  document.querySelectorAll("[data-tab-nav]").forEach(a => { if(a.dataset.tabNav === tabWhich) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   const n = dueCards().length;
+  const all = n + (typeof phrDue === "function" ? phrDue().length + natDue().length : 0);
   $("#due-badge").textContent = n ? String(n) : "";
+  const mb = $("#more-badge"); if(mb) mb.textContent = n ? String(n) : "";
+  const sd = $("#sheet-due"); if(sd) sd.textContent = all ? all + " due" : "";
+  closeSheet();
 }
+function applyTheme(t){
+  t = (t === "dark" || t === "system") ? t : "light";
+  if(t === "system") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", t);
+  const dark = t === "dark" || (t === "system" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  const m = document.getElementById("theme-color"); if(m) m.setAttribute("content", dark ? "#1A2130" : "#FFFFFF");
+  document.querySelectorAll("[data-theme-set]").forEach(b => b.setAttribute("aria-checked", String(b.dataset.themeSet === t)));
+}
+const themePref = () => { const v = lsGet("framework-english-theme"); return v === "dark" || v === "system" ? v : "light"; };
+function setTheme(t){ lsSet("framework-english-theme", t); applyTheme(t); }
+function openSheet(){ const s = $("#more-sheet"); if(!s) return; s.hidden = false; $("#more-btn").setAttribute("aria-expanded", "true"); $("#sheet-ipa").setAttribute("aria-pressed", String(pronOn)); $("#sheet-voice-name").textContent = typeof voiceName === "function" ? voiceName() : ""; applyTheme(themePref()); }
+function closeSheet(){ const s = $("#more-sheet"); if(s && !s.hidden){ s.hidden = true; const b = $("#more-btn"); if(b) b.setAttribute("aria-expanded", "false"); } }
+function togglePron(){ pronOn = !pronOn; lsSet("framework-english-ipa", pronOn); applyPron(); const si = $("#sheet-ipa"); if(si) si.setAttribute("aria-pressed", String(pronOn)); route(); }
 /* voices: rank what the device offers, natural/neural voices first */
 let VOICES = [];
 let voicePref = lsGet("framework-english-voice");
@@ -915,35 +1041,47 @@ const label = w => w === "lot" ? "a lot" : w;
 /* ---------------- views ---------------- */
 const app = document.getElementById("app");
 
+function secTile(href, icon, color, title, sub, note, pct){
+  return `<a class="sec-tile" href="${href}" style="--tc:var(${color})"><span class="sec-ico">${icon}</span><span class="sec-t">${title}</span><span class="sec-s">${sub}</span><span class="sec-p">${note}${pct != null ? `<span class="sec-bar"><span style="width:${pct}%"></span></span>` : ""}</span></a>`;
+}
 function renderLibrary(){
   setNav("library");
-  const A = CARDS[0];
-  const due = dueCards();
+  const due = dueCards(), pd = phrDue(), nd = natDue();
+  const total = due.length + pd.length + nd.length;
   const practised = CARDS.filter(c => P(c).practised > 0).length;
-  const r = radarData();
-  const top = r.basicTop[0] || r.otherTop[0];
   const next = due[0] || CARDS.find(c => !P(c).practised) || CARDS[0];
+  const hr = new Date().getHours();
+  const hello = hr < 12 ? "Good morning" : hr < 18 ? "Good afternoon" : "Good evening";
+  const parts = [due.length ? `${due.length} frame card${due.length > 1 ? "s" : ""}` : "", pd.length ? `${pd.length} phrase${pd.length > 1 ? "s" : ""}` : "", nd.length ? `${nd.length} natural pattern${nd.length > 1 ? "s" : ""}` : ""].filter(Boolean);
+  const go = due.length ? cardHref(due[0]) : pd.length ? "#phrases" : nd.length ? "#natural" : "#partner";
+  const goAttr = !due.length && pd.length ? " data-phr-quiz" : !due.length && !pd.length && nd.length ? " data-nat-quiz" : "";
+  const phrM = PHR.filter(isMastered).length, natM = NAT.filter(natMastered).length, talks = S.partner.length;
+  app.innerHTML = `
+  <header class="home-head"><p class="eyebrow">${hello}</p><h1>What would you like to practise?</h1></header>
+  <section class="today-card">
+    <div><p class="tc-k">Today</p><p class="tc-v">${total ? `${total} item${total > 1 ? "s" : ""} to review` : "You're all caught up"}</p><p class="tc-sub">${parts.length ? parts.join(" · ") : "A short conversation with your AI partner is a great next step."}</p></div>
+    <a class="btn primary" href="${go}"${goAttr}>${total ? "Start review" : "Talk with your partner"}</a>
+  </section>
+  <section class="sec-grid">
+    ${secTile("#partner", ICONS.chat, "--s0", "AI partner", `Talk through ${SCEN.length} work situations`, talks ? `${talks} conversation${talks > 1 ? "s" : ""} so far` : "Speak and get coached", null)}
+    ${secTile("#frames", ICONS.frame, "--s3", "Frame cards", `${CARDS.length} structures for meetings, talks and emails`, `${practised} of ${CARDS.length} practised`, Math.round(100 * practised / CARDS.length))}
+    ${secTile("#phrases", ICONS.book, "--s1", "Phrases", `${PHR.length} collocations and phrasal verbs, B1–C2`, `${phrM} mastered`, Math.round(100 * phrM / PHR.length))}
+    ${secTile("#natural", ICONS.quote, "--s2", "Natural English", `${NAT.length} phrases native speakers use`, `${natM} mastered`, Math.round(100 * natM / NAT.length))}
+  </section>
+  <section class="home-cont"><h2 class="h3">Continue with</h2><ul class="tiles">${tile(next)}</ul></section>`;
+}
+function renderFrames(){
+  setNav("frames");
+  const A = CARDS[0];
   app.innerHTML = `
   <section class="hero">
     <div>
-      <p class="eyebrow">Sentence frames for professional English · C1</p>
-      <h1>Fluent answers have a shape. Learn the shape.</h1>
-      <p class="lede">Each card gives you one reusable frame for a real work situation. Learn it, drill it, then use it in a scenario and get feedback on structure, tone and the words you repeat.</p>
+      <p class="eyebrow">Frame cards · ${CARDS.length} structures</p>
+      <h1>Fluent answers have a shape.</h1>
+      <p class="lede">Each card gives you one reusable frame for a real work situation. Learn it, drill it, then use it in a scenario.</p>
     </div>
-    <div class="hero-demo" aria-label="Example frame">
-      ${stripHTML(A)}
-      ${frameHTML(A, true)}
-      <p class="demo-cap">Card A · Elaborating an opinion. Each colour is one step of the structure${pronOn ? ", and the line under each word shows how to say it. Tap a word to hear it" : ""}.</p>
-    </div>
+    <div class="hero-demo" aria-label="Example frame">${stripHTML(A)}${frameHTML(A, true)}<p class="demo-cap">Card A · Each colour is one step of the structure.</p></div>
   </section>
-  <section class="today" aria-label="Today">
-    <a class="stat" href="#review"><span class="k">Due for review</span><span class="v">${due.length}</span></a>
-    <div class="stat"><span class="k">Cards practised</span><span class="v">${practised}<small> / ${CARDS.length}</small></span></div>
-    <a class="stat" href="#radar"><span class="k">Most repeated word</span><span class="v">${top ? esc(label(top.w)) : "None yet"}</span></a>
-    <a class="btn primary" href="${cardHref(next)}">${due.length ? "Review" : (practised ? "Continue" : "Start")} with Card ${next.id} →</a>
-  </section>
-  <a class="panel promo" href="#phrases"><div style="flex:1;min-width:220px"><h2 class="h3">Collocations & phrasal verbs</h2><p class="muted" style="margin:0">${PHR.length} work phrases from B1 to C2 · ${PHR.filter(isMastered).length} mastered${phrDue().length ? ` · <b style="color:var(--warn)">${phrDue().length} due</b>` : ""}</p></div><span class="btn">Practise phrases →</span></a>
-  <a class="panel promo" href="#natural"><div style="flex:1;min-width:220px"><h2 class="h3">Natural English</h2><p class="muted" style="margin:0">${NAT.length} phrases and structures native speakers use every day · ${NAT.filter(natMastered).length} mastered${natDue().length ? ` · <b style="color:var(--warn)">${natDue().length} due</b>` : ""}</p></div><span class="btn">Sound more natural →</span></a>
   <section class="library">
     ${GROUPS.map(g => `<div class="group"><h2>${g.name}</h2><p class="muted">${g.desc}</p><ul class="tiles">${CARDS.filter(c => c.g === g.name).map(tile).join("")}</ul></div>`).join("")}
   </section>`;
@@ -961,7 +1099,7 @@ function renderCard(c){
   const idx = CARDS.indexOf(c), prev = CARDS[idx - 1], next = CARDS[idx + 1];
   const names = {learn:"Learn", drill:"Drill", practise:"Practise"};
   app.innerHTML = `
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="#library">Library</a> / ${c.g} / Card ${c.id}</nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="#frames">Frame cards</a> / ${c.g} / Card ${c.id}</nav>
   <header class="card-head">
     <span class="letter big">${c.id}</span>
     <div><p class="eyebrow">${c.g} · Fixes: ${esc(c.fix)}</p><h1>${esc(c.t)}</h1></div>
@@ -1615,6 +1753,11 @@ function renderSettings(){
     <p class="muted" id="set-mic-out" style="margin:10px 0 0" aria-live="polite"></p>
   </section>
   <section class="panel">
+    <h2 class="h3">Appearance</h2>
+    <span class="seg-ctl" role="radiogroup" aria-label="Appearance">${[["light", "Light"], ["dark", "Dark"], ["system", "Match phone"]].map(([k, l]) => `<button role="radio" aria-checked="${themePref() === k}" data-theme-set="${k}">${l}</button>`).join("")}</span>
+    <label class="check" style="margin-top:14px;display:flex"><input type="checkbox" id="set-ipa"${pronOn ? " checked" : ""}> Show pronunciation (IPA) under each word</label>
+  </section>
+  <section class="panel">
     <h2 class="h3">Install on your phone</h2>
     ${standalone ? '<p style="margin:0">You\'re using the installed app.</p>' : `<p style="margin:0 0 10px">In Chrome, open the <b>⋮</b> menu and tap <b>Install app</b> (or <b>Add to Home screen</b>). The app then opens full screen from its own icon.</p><button class="btn primary" id="set-install" type="button"${deferredInstall ? "" : " hidden"}>Install now</button>`}
   </section>`;
@@ -1644,6 +1787,8 @@ function renderSettings(){
       onUpdate:() => { if(Mic.owner === sm && (Mic.text || Mic.interim)) out.textContent = "Heard: " + (Mic.text + " " + Mic.interim).trim(); },
       onDone:(t, s, conf, err) => { sm.classList.remove("listening"); out.textContent = err ? micErrText(err) : t ? "Heard: “" + t + "”. The microphone works." : "Nothing was heard. Check that Chrome may use the microphone."; }});
   };
+  app.querySelectorAll("[data-theme-set]").forEach(b => b.onclick = () => { setTheme(b.dataset.themeSet); });
+  $("#set-ipa").onchange = () => { togglePron(); };
   const inst = $("#set-install"); if(inst) inst.onclick = () => { const ib = $("#install-btn"); if(ib) ib.click(); };
 }
 
@@ -2507,6 +2652,7 @@ function route(){
   if(h === "settings") return renderSettings();
   if(h === "phrases") return renderPhrases();
   if(h === "natural") return renderNatural();
+  if(h === "frames") return renderFrames();
   renderLibrary();
 }
 window.addEventListener("hashchange", () => { try{ speechSynthesis.cancel(); }catch(e){} if(Mic.active) micStop(false); route(); window.scrollTo(0, 0); });
@@ -2518,7 +2664,15 @@ function start(data){
   if(data && data.drafts && typeof data.drafts === "object") Object.assign(drafts, data.drafts);
   if(data && data.chat && typeof data.chat === "object" && Array.isArray(data.chat.msgs)) chat = data.chat;
   applyPron();
-  $("#ipa-toggle").onclick = () => { pronOn = !pronOn; lsSet("framework-english-ipa", pronOn); applyPron(); route(); };
+  $("#ipa-toggle").onclick = togglePron;
+  applyTheme(themePref());
+  try{ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => applyTheme(themePref())); }catch(e){}
+  $("#more-btn").onclick = () => { const s = $("#more-sheet"); if(s.hidden) openSheet(); else closeSheet(); };
+  $("#more-sheet").addEventListener("click", e => { if(e.target.id === "more-sheet" || (e.target.closest && e.target.closest("[data-close]"))) setTimeout(closeSheet, 0); });
+  $("#sheet-ipa").onclick = () => { togglePron(); openSheet(); };
+  $("#sheet-voice").onclick = () => { closeSheet(); const vb = $("#voice-btn"); const vp = $("#voice-panel"); vp.hidden = false; vb.setAttribute("aria-expanded", "true"); loadVoices(); window.scrollTo({top:0, behavior:"smooth"}); };
+  document.querySelectorAll("[data-theme-set]").forEach(b => b.onclick = () => setTheme(b.dataset.themeSet));
+  document.addEventListener("keydown", e => { if(e.key === "Escape") closeSheet(); });
   const vp = $("#voice-panel"), vbtn = $("#voice-btn");
   if(!("speechSynthesis" in window)){ vbtn.hidden = true; }
   vbtn.onclick = () => { const open = vp.hidden; vp.hidden = !open; vbtn.setAttribute("aria-expanded", String(open)); if(open) loadVoices(); };
