@@ -247,6 +247,74 @@ mark.hl{background:color-mix(in srgb,var(--accent) 15%,transparent);color:inheri
 .icon-btn:hover{border-color:var(--accent)}
 .stiff{font:400 19px/1.5 var(--frame);margin:0;padding:10px 14px;border-left:3px solid var(--muted);background:color-mix(in srgb,var(--muted) 7%,var(--surface));border-radius:0 9px 9px 0;color:var(--muted)}
 @media (max-width: 720px){ .fchips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -4px;padding:0 4px 2px} .fchips::-webkit-scrollbar{display:none} .fchip{white-space:nowrap} }
+/* partner v2 */
+.resume{display:flex;gap:14px;align-items:center;flex-wrap:wrap;border-color:color-mix(in srgb,var(--accent) 35%,transparent)}
+.mission-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.mission-list li{padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--accent) 5%,var(--surface));border:1px solid var(--line);font-size:15px}
+.mission-list .mi{font-weight:700;display:inline-block;width:16px}
+.mission-list .m-used .mi{color:var(--good)} .mission-list .m-misused .mi{color:var(--warn)} .mission-list .m-todo .mi{color:var(--muted)}
+.pill.k-card{background:color-mix(in srgb,var(--s3) 16%,transparent);color:var(--s3)}
+.pill.k-phr{background:color-mix(in srgb,var(--s1) 16%,transparent);color:var(--s1)}
+.pill.k-nat{background:color-mix(in srgb,var(--s2) 16%,transparent);color:var(--s2)}
+.opts-panel summary{cursor:pointer;list-style:none}
+.opts-panel summary::-webkit-details-marker{display:none}
+.opts-panel summary::before{content:"▸ ";color:var(--muted)}
+.opts-panel[open] summary::before{content:"▾ "}
+.start-row{position:sticky;bottom:12px;z-index:5;display:flex;justify-content:center}
+.start-btn{width:100%;max-width:520px;justify-content:center;padding:16px 20px;font-size:16.5px;border-radius:14px;box-shadow:0 8px 24px -10px color-mix(in srgb,var(--accent) 70%,transparent)}
+.chat-head{position:sticky;top:58px;z-index:4;padding:12px 14px}
+.chat-head .h2{font-size:20px}
+.chat-title{align-items:center}
+.avatar{width:42px;height:42px;font-size:19px}
+.end-btn{padding:8px 14px;font-size:14px;color:var(--bad);border-color:color-mix(in srgb,var(--bad) 35%,transparent)}
+.end-menu{margin-top:12px;padding:12px;border-radius:12px;background:color-mix(in srgb,var(--bad) 6%,var(--surface));border:1px solid color-mix(in srgb,var(--bad) 22%,transparent)}
+.stages{list-style:none;margin:10px 0 0;padding:0;display:flex;gap:4px}
+.stages li{flex:1;font:600 11px/1 var(--body);color:var(--muted);padding-top:7px;border-top:3px solid var(--line);text-align:center}
+.stages li.done{border-top-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.stages li.cur{border-top-color:var(--accent);color:var(--accent)}
+.mission{margin-top:10px}
+.mission-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.mission-note{font-size:12.5px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:65%}
+.mission-chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:6px 0 2px}
+.mission-chips::-webkit-scrollbar{display:none}
+.mchip{flex:none;display:inline-flex;gap:6px;align-items:center;font:600 13px/1.2 var(--body);padding:7px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;white-space:nowrap}
+.mchip .mi{font-weight:800}
+.mchip.used{background:color-mix(in srgb,var(--good) 12%,var(--surface));border-color:color-mix(in srgb,var(--good) 40%,transparent);color:var(--good)}
+.mchip.misused{background:color-mix(in srgb,var(--warn) 12%,var(--surface));border-color:color-mix(in srgb,var(--warn) 40%,transparent);color:var(--warn)}
+.mchip.todo .mi{color:var(--muted)}
+.fbk-mini{font-size:13.5px;padding:2px 4px}
+.fbk-mini.ok{color:var(--good)}
+.fbk-d{align-self:flex-end;max-width:720px;width:100%}
+.fbk-d summary{cursor:pointer;list-style:none;font-size:13.5px;text-align:right;padding:2px 4px}
+.fbk-d summary::-webkit-details-marker{display:none}
+.tipcount{display:inline-block;font:700 12px/1 var(--body);padding:5px 9px;border-radius:999px;background:color-mix(in srgb,var(--warn) 14%,var(--surface));color:var(--warn)}
+.fbk-d[open] .fbk{margin-top:6px}
+.ended-note{align-self:center;text-align:center;font-size:14px;color:var(--muted);padding:10px 14px;border-radius:999px;background:color-mix(in srgb,var(--accent) 7%,var(--surface))}
+.composer-foot{flex-basis:100%;display:flex;gap:14px;align-items:center;padding:0 4px}
+.hint-btn{display:inline-flex;gap:5px;align-items:center;font:600 13px/1 var(--body);padding:7px 11px;border-radius:999px;border:1px solid color-mix(in srgb,var(--s4) 40%,transparent);background:color-mix(in srgb,var(--s4) 10%,var(--surface));color:var(--s4);cursor:pointer}
+.check.small{font-size:13px;color:var(--muted)}
+.check.small input{width:15px;height:15px}
+.score-hero{display:flex;gap:16px;align-items:center;margin-bottom:14px}
+.ring{--p:0;flex:none;width:76px;height:76px;border-radius:50%;background:conic-gradient(var(--accent) calc(var(--p) * 1%),var(--line) 0);display:grid;place-items:center}
+.ring span{display:grid;place-items:center;width:60px;height:60px;border-radius:50%;background:var(--surface);font:800 24px/1 var(--display)}
+.skills .bar-row{grid-template-columns:110px 1fr 40px}
+.focus-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.focus-list li{padding:10px 12px;border-radius:12px;border:1px solid var(--line)}
+.focus-list s{color:var(--muted)}
+.ch-line{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linejoin:round}
+.ch-area{fill:color-mix(in srgb,var(--accent) 12%,transparent)}
+.ch-dot{fill:var(--surface);stroke:var(--accent);stroke-width:2}
+.ch-dot-last{fill:var(--accent)}
+@media (max-width: 720px){
+  .scen-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .scen{padding:11px;gap:3px}
+  .scen .tt{font-size:14.5px}
+  .scen-who{font-size:12.5px}
+  .scen-goal{display:none}
+  .chat-head{top:52px;border-radius:14px}
+  .start-row{bottom:calc(76px + env(safe-area-inset-bottom))}
+  .skills .bar-row{grid-template-columns:96px 1fr 36px}
+}
 #voice-btn{margin-left:0}
 #voice-btn-name{max-width:14ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .voice-panel{flex-basis:100%;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;max-width:620px;margin-left:auto}
@@ -1591,7 +1659,7 @@ function setMicUI(){
   micStatus(on ? (handsFree ? "Listening… your answer is sent when you pause." : "Listening… tap the microphone when you've finished.") : (!SR ? "Voice input needs Chrome on Android. You can still type." : handsFree ? "Hands-free is on. Tap the microphone to answer." : ""));
 }
 function pvMicStart(){
-  if(!chat || chat.report) return;
+  if(!chat || chat.report || chat.ended) return;
   if(!SR){ setMicUI(); return; }
   try{ speechSynthesis.cancel(); }catch(e){}
   const ta = $("#pv-say");
@@ -1609,13 +1677,14 @@ function pvMicStart(){
 function sendWhenReady(t, conf, tries){
   tries = tries || 0;
   if(!chat || location.hash !== "#partner") return;
+  if(chat.ended) return;
   if(chat.busy && tries < 60){ setTimeout(() => sendWhenReady(t, conf, tries + 1), 300); return; }
   const box = $("#pv-say"); if(box) box.value = "";
   lastConf = null;
   sendTurn(t, conf);
 }
 function speakReply(c, text){
-  const after = () => { if(handsFree && chat === c && location.hash === "#partner" && !c.report && !Mic.active) pvMicStart(); };
+  const after = () => { if(handsFree && chat === c && location.hash === "#partner" && !c.report && !c.ended && !Mic.active) pvMicStart(); };
   if(autoSpeak) speak(text, 1, ok => { if(ok) after(); });
   else after();
 }
@@ -2349,81 +2418,132 @@ function natSay(items, pane){
   };
 }
 
-/* ---------------- AI partner ---------------- */
+/* ---------------- AI partner: topic conversations with a mission ---------------- */
 const SCEN = [
- {id:"release", name:"Weekly releases debate", who:"Sarah", role:"your engineering manager", desc:"Sarah wants to move the team from monthly to weekly releases next month. She is open to arguments but needs convincing either way.", goal:"Give a well-supported opinion and push back diplomatically.", cards:["A","B","F"], open:"So, I'm thinking we move to weekly releases starting next month. What's your take?"},
- {id:"standup", name:"Daily stand-up", who:"Minh", role:"the team's scrum master", desc:"A quick daily stand-up. Minh asks follow-up questions about progress, blockers and dates.", goal:"Give a clear, structured update and ask for help with a blocker.", cards:["G","E"], open:"Morning! Let's go round. What did you get done yesterday, and is anything blocking you?"},
- {id:"client", name:"Client wants a late feature", who:"David", role:"a demanding client", desc:"Two days before launch, David insists on adding an export feature to this release. He is polite but persistent.", goal:"Push back without damaging the relationship and offer options.", cards:["O","B","M"], open:"I know we're close to launch, but we really need the export feature in this release. Can you make that happen?"},
- {id:"qa", name:"Tough Q&A after a presentation", who:"Priya", role:"a sceptical director", desc:"The learner has just presented a project and asked for budget. Priya challenges the numbers, timing and risks.", goal:"Handle hard questions calmly, with evidence and a clear ask.", cards:["K","J","L"], open:"Thanks for the presentation. Honestly, I'm not convinced yet. Why should we fund this now, when budgets are tight?"},
- {id:"negotiation", name:"Vendor negotiation", who:"Tom", role:"a software vendor's sales lead", desc:"Tom is selling an annual software licence for 48,000 dollars. He has some room to move but wants a longer contract.", goal:"Negotiate a better deal using conditions and trade-offs.", cards:["F","B","H"], open:"So, based on your requirements, the annual licence comes to 48,000 dollars. How does that sound?"},
- {id:"interview", name:"Job interview", who:"James", role:"a hiring manager", desc:"A job interview for a senior role. James asks behavioural questions and follows up for specifics.", goal:"Give detailed answers with examples and results.", cards:["A","I","K"], open:"Thanks for coming in. To start, could you tell me a bit about yourself and what you're working on at the moment?"},
- {id:"smalltalk", name:"Coffee-break small talk", who:"Emma", role:"a friendly colleague from another team", desc:"Casual small talk by the coffee machine: weekends, travel, food, work news.", goal:"Keep the chat flowing with longer answers and questions back.", cards:["E"], open:"Hey! How was your weekend? Get up to anything fun?"},
- {id:"free", name:"Free conversation", who:"Alex", role:"a curious colleague", desc:"An open conversation about whatever the learner wants to discuss: work, ideas, news or plans.", goal:"Practise elaborating: reasons, examples and opinions.", cards:["A","E","F"], open:"Hey! How's your week going? Anything interesting on your plate at the moment?"}
+ {id:"catchup", name:"Catching up with a colleague", who:"Daniel", role:"a colleague you haven't seen for a few months", desc:"Daniel bumps into the learner in the office kitchen after a few months. It's a friendly, relaxed chat.", topic:"what each of you has been working on, how it's going, and plans for the next few months", goal:"Keep a friendly conversation going with details, opinions and questions back.", cards:["A","E"], turns:8},
+ {id:"release", name:"Weekly releases debate", who:"Sarah", role:"your engineering manager", desc:"Sarah wants to move the team from monthly to weekly releases next month. She's open to arguments but needs convincing either way.", topic:"whether to move to weekly releases, the risks, and what would need to change", goal:"Give a well-supported opinion and push back diplomatically.", cards:["A","B","F"], turns:9},
+ {id:"delay", name:"Explaining a project delay", who:"Laura", role:"your line manager", desc:"The learner's project is about two weeks behind. Laura is calm but wants to understand why and what happens next.", topic:"why the project is late, the impact on the client, and a realistic recovery plan", goal:"Explain clearly, take responsibility and propose a plan.", cards:["G","P","F"], turns:9},
+ {id:"standup", name:"Daily stand-up", who:"Minh", role:"the team's scrum master", desc:"A quick daily stand-up. Minh asks about progress, blockers and dates, and follows up on anything vague.", topic:"what the learner did yesterday, what they're doing today, and any blockers", goal:"Give a clear, structured update and ask for help with a blocker.", cards:["G","E"], turns:6},
+ {id:"client", name:"Client wants a late feature", who:"David", role:"a demanding client", desc:"Two days before launch, David insists on adding an export feature to this release. He's polite but persistent.", topic:"the late feature request, why it's hard now, and the options", goal:"Push back without damaging the relationship and offer options.", cards:["O","B","M"], turns:9},
+ {id:"complaint", name:"Customer complaint call", who:"Mr Peterson", role:"an unhappy customer on the phone", desc:"Mr Peterson's order arrived a week late and incomplete. He's annoyed but reasonable if treated well.", topic:"what went wrong with his order and what the learner will do to fix it", goal:"Stay calm, apologise well, clarify and agree a solution.", cards:["B","K","E"], turns:8},
+ {id:"qa", name:"Tough questions after a presentation", who:"Priya", role:"a sceptical director", desc:"The learner has just presented a project and asked for budget. Priya challenges the numbers, timing and risks.", topic:"why the project deserves funding now, the evidence, and the risks", goal:"Handle hard questions calmly, with evidence and a clear ask.", cards:["K","J","L"], turns:9},
+ {id:"negotiation", name:"Vendor negotiation", who:"Tom", role:"a software vendor's sales lead", desc:"Tom is selling an annual software licence for 48,000 dollars. He has some room to move but wants a longer contract.", topic:"price, contract length and what's included", goal:"Negotiate a better deal using conditions and trade-offs.", cards:["F","B","H"], turns:10},
+ {id:"offsite", name:"Planning a team offsite", who:"Kevin", role:"a teammate organising the team offsite", desc:"Kevin is planning a one-day team offsite and wants the learner's ideas.", topic:"the date, the place, activities and budget for the offsite", goal:"Suggest ideas, agree and disagree naturally, and agree next steps.", cards:["F","H","A"], turns:8},
+ {id:"career", name:"Career conversation", who:"Rachel", role:"your mentor", desc:"A relaxed one-to-one with a supportive mentor who asks thoughtful questions.", topic:"the learner's strengths, what they want to develop, and their next career step", goal:"Talk about yourself with detail, examples and reflection.", cards:["A","I"], turns:9},
+ {id:"interview", name:"Job interview", who:"James", role:"a hiring manager", desc:"A job interview for a senior role. James asks behavioural questions and follows up for specifics.", topic:"the learner's experience, a difficult situation they handled, and why they want the role", goal:"Give detailed answers with examples and results.", cards:["A","I","K"], turns:9},
+ {id:"smalltalk", name:"Coffee-break small talk", who:"Emma", role:"a friendly colleague from another team", desc:"Casual small talk by the coffee machine.", topic:"weekends, travel, food or work news, whatever comes up", goal:"Keep the chat flowing with longer answers and questions back.", cards:["E"], turns:7}
 ];
-const CORR = [["every", "Correct every message"], ["key", "Only important mistakes"], ["end", "Just talk, feedback at the end"]];
+const CORR = [["tips", "Tips after each message"], ["end", "Only at the end"]];
+const STAGES = [["greeting", "Greeting"], ["topic", "Topic"], ["wrap_up", "Wrap-up"], ["goodbye", "Goodbye"]];
+const LV_IDX = {B1:0, B2:1, C1:2, C2:3};
+const CHAT_LS = "framework-english-chat";
 let chat = null;
 let autoSpeak = lsGet("framework-english-autospeak") !== false;
-const partnerSetup = {sid:"release", level:"every"};
+const partnerSetup = {sid:"catchup", targets:null, confirmEnd:false};
+const plevel = () => { const v = lsGet("framework-english-plevel"); return LV_IDX[v] != null ? v : "B2"; };
+const pcorr = () => lsGet("framework-english-pcorr") === "end" ? "end" : "tips";
+const userName = () => { const v = lsGet("framework-english-name"); return typeof v === "string" ? v.trim().slice(0, 40) : ""; };
 const scenOf = id => SCEN.find(s => s.id === id) || SCEN[0];
+function saveChat(){
+  try{
+    if(chat && !chat.report) localStorage.setItem(CHAT_LS, JSON.stringify(Object.assign({}, chat, {busy:false, streaming:null, assessing:false})));
+    else localStorage.removeItem(CHAT_LS);
+  }catch(e){}
+}
+function savedChat(){
+  const c = lsGet(CHAT_LS);
+  if(!c || typeof c !== "object" || !Array.isArray(c.msgs) || !Array.isArray(c.targets) || c.report) return null;
+  if(Date.now() - (+c.at || 0) > 3 * DAY) return null;
+  return c;
+}
+
+function pickTargets(sid, lv){
+  const s = scenOf(sid), out = [];
+  const cid = shuffle(s.cards)[0];
+  const c = CARDS.find(x => x.id === cid);
+  if(c) out.push({kind:"card", id:c.id, label:c.t, hint:c.steps.join(" → ")});
+  const pri = (store, p) => { const b = (store[p.id] || {}).box || 0; return b > 0 && b < 3 ? 0 : b === 0 ? 1 : 2; };
+  const phr = shuffle(PHR.filter(p => p.lv === lv)).sort((a, b) => pri(S.phr, a) - pri(S.phr, b));
+  [phr.find(p => p.k === "c"), phr.find(p => p.k === "p")].filter(Boolean).forEach(p => out.push({kind:"phr", id:p.id, label:p.ph, hint:p.m}));
+  shuffle(NAT.filter(p => LV_IDX[p.lv] <= LV_IDX[lv])).sort((a, b) => pri(S.nat, a) - pri(S.nat, b)).slice(0, 2)
+    .forEach(p => out.push({kind:"nat", id:p.id, label:p.pat, hint:p.use}));
+  return out.map((t, i) => Object.assign(t, {tid:"T" + (i + 1), status:""}));
+}
+const kindLabel = k => k === "card" ? "Frame" : k === "phr" ? "Phrase" : "Natural";
+const targetDesc = t => t.kind === "card" ? `${t.tid}: the "${t.label}" structure (${t.hint})` : `${t.tid}: "${t.label}" (${t.hint})`;
+function markTarget(t, ok){
+  if(t.kind === "phr"){ const p = PHR.find(x => x.id === t.id); if(p) phrMark(p, ok); }
+  else if(t.kind === "nat"){ const p = NAT.find(x => x.id === t.id); if(p) natMark(p, ok); }
+  else if(t.kind === "card" && ok){ const c = CARDS.find(x => x.id === t.id); if(c){ P(c).practised++; persist(); } }
+}
 
 async function askJSON(prompt){
   if(!sampleFn) throw {code:"no_key"};
-  let val = null;
-  if(typeof sampleFn.json === "function"){
-    try{ val = await sampleFn.json(prompt, {modelTier:"default"}); }
-    catch(e){ if(e && (e.code === "not_granted" || e.code === "rate_limited")) throw e; val = null; }
-  }
-  if(!val || typeof val !== "object"){ const r = await sampleFn(prompt, {modelTier:"default"}); val = parseJSON(r && r.text); }
-  return val;
+  const r = await sampleFn(prompt);
+  return parseJSON(r && r.text);
 }
 function aiError(e){
   const code = e && e.code;
-  if(code === "not_granted"){ document.body.classList.remove("has-ai"); return "The AI partner is turned off for this page. Allow Claude for this page on claude.ai to use it."; }
-  if(code === "rate_limited") return "Too many messages in a short time. Wait a minute, then send again.";
+  if(code === "rate_limited") return "Too many messages in a short time. Wait a minute, then try again.";
   if(code === "no_key") return "Add your Claude API key in Settings to use the AI features.";
   if(code === "bad_key") return "Your Claude API key was rejected. Check it in Settings.";
   if(code === "credit") return "Your Claude API account is out of credit. Add credit at console.anthropic.com, then try again.";
-  if(code === "overloaded") return "Claude is busy right now. Wait a few seconds and send again.";
-  if(code === "network") return "No internet connection. Check your connection and send again.";
-  return "Your partner didn't answer" + (e && e.message ? " (" + String(e.message).slice(0, 120) + ")" : "") + ". Try sending again.";
+  if(code === "overloaded") return "Claude is busy right now. Wait a few seconds and try again.";
+  if(code === "network") return "No internet connection. Check your connection and try again.";
+  return "Your partner didn't answer" + (e && e.message ? " (" + String(e.message).slice(0, 120) + ")" : "") + ". Try again.";
 }
-const transcript = (c, upto) => c.msgs.slice(0, upto).slice(-18).map(m => (m.role === "partner" ? scenOf(c.sid).who : "Learner") + ": " + m.text).join("\n");
-const cardList = () => CARDS.map(c => c.id + " " + c.t).join("; ");
+const transcript = (c, upto) => c.msgs.slice(0, upto).slice(-20).map(m => (m.role === "partner" ? scenOf(c.sid).who : (c.name || "Learner")) + ": " + m.text).join("\n");
 
-function partnerPrompt(c, text, conf){
-  const s = scenOf(c.sid);
-  const lvl = c.level === "key" ? "Report only mistakes a listener would clearly notice." : c.level === "end" ? "Feedback is hidden until the end, but still fill it in." : "Report every grammar, word-choice and tone issue.";
-  return `You are playing ${s.who}, ${s.role}, in a spoken English practice conversation with a C1-level professional who wants to sound fluent, precise and diplomatic at work.
-Scenario: ${s.desc}
-Learner's goal: ${s.goal}
+function convPrompt(c, text, conf){
+  const s = scenOf(c.sid), name = c.name, opening = text == null;
+  const turns = c.msgs.filter(m => m.role === "me").length;
+  const head = `You are ${s.who}, ${s.role}. You're having a natural spoken conversation in English with ${name || "the learner"}, a C1-level professional practising for real work situations.
+Situation: ${s.desc}
+Topic to cover: ${s.topic}
 
-As ${s.who}: stay in character and talk like a native speaker in a real workplace. Keep each reply to 1-3 short spoken sentences, use contractions, react to what the learner actually said, and end with a question or challenge that makes them elaborate, persuade or clarify. Push back realistically. Never mention being an AI, a tutor or a practice exercise in "reply".
+How the conversation should flow:
+1. Greeting: greet ${name ? name + " by name" : "them"} warmly and naturally, with a little small talk that fits your relationship. Don't jump into the topic in your first line.
+2. Topic: after one or two exchanges, move naturally into the topic. Ask open questions, react to what they actually said, follow up on details, and push back where the situation calls for it.
+3. Wrap-up: when the topic has been explored (usually after ${s.turns} to ${s.turns + 3} learner turns), or as soon as the learner says they need to go or want to stop, start wrapping up: briefly sum up or agree next steps.
+4. Goodbye: end with a natural goodbye line. Set "end" to true only in that final goodbye.
 
-Separately, as a coach, review ONLY the learner's latest message. Their known weaknesses: short answers, basic vocabulary, repeating words, blunt tone. ${lvl}
-The learner typed or dictated the message with speech-to-text, so ignore missing punctuation and capital letters. If a word looks like a dictation mishearing (a real word that doesn't fit the context, such as "sheep" for "ship" or "walk" for "work"), add it to "pronunciation" with the word they probably meant and the sound to work on.
-For "pronunciation", also pick 1-2 words from the learner's message that C1 speakers often mispronounce (word stress, -ed and -s endings, th, final consonants, vowel length). Use General American IPA with ˈ and ˌ stress marks.
-Phrase frames the learner is studying (letter and title): ${cardList()}
+Style: sound like a real native speaker. Keep each line to 1-3 short spoken sentences with contractions and natural phrases. Vary your reactions and keep it interactive. Never mention being an AI, a tutor or an exercise, and never correct the learner's English in your reply.
 
+The learner is trying to use these target expressions in the conversation:
+${c.targets.map(targetDesc).join("\n")}
+Create natural chances for them to use the targets (for example by asking for an opinion, a proposal, an update or a summary), but never use the target expressions yourself and never mention them.`;
+  if(opening) return head + `
+
+Start the conversation now with your greeting.
+Answer in exactly this format, with nothing before or after it:
+<reply>${s.who}'s greeting</reply>
+<meta>{"stage":"greeting","end":false,"used":[],"misused":[],"hint":"<a short idea for how the learner could reply, max 20 words>"}</meta>`;
+  return head + `
+
+Learner turns so far: ${turns}. Current stage: ${c.stage || "greeting"}.
 Conversation so far:
 ${transcript(c, c.msgs.length - 1)}
 
-Learner's latest message: """${text}"""${conf ? `
-Speech recognition confidence for this message: ${Math.round(conf * 100)}%. Below about 75% usually means some words were pronounced unclearly; if so, guess which words and include them in "pronunciation".` : ""}
+${name || "Learner"}'s latest message (spoken with speech-to-text, so ignore punctuation and capital letters): """${text}"""${conf ? `
+Speech recognition confidence for this message: ${Math.round(conf * 100)}%. Below about 75% usually means some words were unclear; if so, guess which words and include them in "pronunciation".` : ""}
 
 Answer in exactly this format, with nothing before or after it:
 <reply>${s.who}'s next spoken line</reply>
-<feedback>{"natural":"<the learner's message as a fluent native professional would say it, same meaning and similar length or a bit longer; repeat it unchanged if it is already natural>",
-  "issues":[{"type":"grammar" | "word choice" | "tone" | "structure","original":"<learner's words>","better":"<improved words>","why":"<max 15 words>"}],
-  "pronunciation":[{"word":"<word>","ipa":"<IPA, no slashes>","tip":"<max 15 words>"}],
-  "praise":"<one specific thing they did well, max 15 words>",
-  "frame":"<one card letter A-Q that would most help their next answer, or empty>"}</feedback>
-Use at most 4 issues and 3 pronunciation items. Use empty arrays when there is nothing to report.`;
+<meta>{"stage":"greeting" | "topic" | "wrap_up" | "goodbye","end":<true only if your reply is the final goodbye>,"used":[<ids such as "T1" of targets the learner used correctly and naturally in their latest message>],"misused":[<ids of targets they tried but used wrongly>],"hint":"<a short idea for what the learner could say next, ideally using a target not used yet, max 20 words>"}</meta>
+<feedback>{"natural":"<their latest message as a fluent native professional would say it, same meaning; repeat it unchanged if it's already natural>",
+ "issues":[{"type":"grammar" | "word choice" | "tone" | "structure","original":"<their words>","better":"<improved words>","why":"<max 15 words>"}],
+ "pronunciation":[{"word":"<word>","ipa":"<General American IPA with ˈ and ˌ, no slashes>","tip":"<max 15 words>"}],
+ "praise":"<one specific thing they did well, max 15 words>"}</feedback>
+Feedback rules: review only their latest message. Their known weaknesses are short answers, basic vocabulary, repeated words and a blunt tone. At most 4 issues and 2 pronunciation items (words C1 speakers often mispronounce, or words the speech recogniser seems to have misheard). Use empty arrays when there's nothing to report.`;
 }
 function reportPrompt(c){
   const s = scenOf(c.sid);
   const notes = c.msgs.filter(m => m.role === "me" && m.fb).map(m => arr(m.fb.issues).map(i => `${i.type}: "${i.original}" -> "${i.better}"`).join("; ")).filter(Boolean).join("\n");
-  return `You are an English speaking coach. A C1-level professional just finished a role-play: ${s.name} (${s.who}, ${s.role}). Their goal: ${s.goal}
-Their known weaknesses: short answers, basic vocabulary, repeated words, blunt tone. They spoke by dictation, so ignore punctuation and capitalisation.
+  return `You are an English speaking coach. A C1-level professional just finished a role-play conversation: ${s.name} (${s.who}, ${s.role}). Their goal: ${s.goal}
+Their known weaknesses: short answers, basic vocabulary, repeated words, blunt tone. They spoke by speech-to-text, so ignore punctuation and capitalisation.
+
+Target expressions and whether they used them correctly:
+${c.targets.map(t => `${targetDesc(t)} -> ${t.status === "used" ? "used correctly" : t.status === "misused" ? "tried, but used incorrectly" : "not used"}`).join("\n")}
 
 Full conversation:
 ${transcript(c, c.msgs.length)}
@@ -2431,141 +2551,228 @@ ${transcript(c, c.msgs.length)}
 Issues noted during the conversation:
 ${notes || "(none recorded)"}
 
-Write a short, specific, encouraging debrief. Return ONLY JSON with exactly this shape:
+Write a short, specific, encouraging assessment. Score each skill from 1 (weak) to 5 (excellent for C1+) based only on this conversation. Return ONLY JSON with exactly this shape:
 {"level":"<estimated CEFR level for this conversation, e.g. B2+, C1-, C1, C1+>",
+ "scores":{"fluency":<1-5: elaboration and length of answers>,"grammar":<1-5>,"vocabulary":<1-5: range and precision>,"naturalness":<1-5: sounds like a native speaker>,"interaction":<1-5: reacting, asking questions, keeping it going>},
  "summary":"<2 sentences on how the conversation went against the goal>",
  "strengths":["<specific strength>", "<...>"],
- "focus":[{"area":"<what to improve>","example":"<the learner's actual words>","better":"<a better version>"}],
+ "focus":[{"area":"<what to improve>","example":"<their actual words>","better":"<a better version>"}],
  "words":[{"word":"<word or short phrase to practise saying>","ipa":"<General American IPA with ˈ ˌ, no slashes>","tip":"<max 12 words>"}],
- "cards":["<card letters from: ${CARDS.map(x => x.id).join(", ")} that would help most>"],
  "next":"<one concrete thing to try in the next conversation>"}
-Use 2-3 strengths, 2-4 focus items, 3-6 words, 1-3 cards.`;
+Use 2-3 strengths, 2-4 focus items and 2-5 words.`;
 }
 
+/* ----- setup + progress ----- */
+const SKILLS = [["fluency", "Fluency"], ["grammar", "Grammar"], ["vocabulary", "Vocabulary"], ["naturalness", "Naturalness"], ["interaction", "Interaction"]];
+const scored = () => S.partner.filter(p => p && p.scores && typeof p.scores === "object");
+function overallOf(sc){ const v = SKILLS.map(([k]) => +sc[k] || 0).filter(Boolean); return v.length ? Math.round(20 * v.reduce((a, b) => a + b, 0) / v.length) : 0; }
+function progressChart(list){
+  const W = 640, H = 170, pl = 32, pr = 12, pt = 14, pb = 26;
+  const xs = i => pl + (list.length === 1 ? (W - pl - pr) / 2 : i * (W - pl - pr) / (list.length - 1));
+  const y = v => pt + (H - pt - pb) * (1 - v / 100);
+  let g = "";
+  [0, 25, 50, 75, 100].forEach(t => { g += `<line class="ch-grid" x1="${pl}" x2="${W - pr}" y1="${y(t)}" y2="${y(t)}"/><text class="ch-txt" x="${pl - 6}" y="${y(t) + 4}" text-anchor="end">${t}</text>`; });
+  const pts = list.map((p, i) => [xs(i), y(p.overall)]);
+  if(pts.length > 1) g += `<path class="ch-area" d="M${pts[0][0]},${y(0)} ${pts.map(p => "L" + p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" ")} L${pts[pts.length - 1][0]},${y(0)} Z"/><path class="ch-line" d="${pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" ")}"/>`;
+  pts.forEach((p, i) => { g += `<circle class="${i === pts.length - 1 ? "ch-dot-last" : "ch-dot"}" cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${i === pts.length - 1 ? 5 : 3.5}"><title>${new Date(list[i].at).toLocaleDateString()} · ${list[i].overall}</title></circle>`; });
+  const last = pts[pts.length - 1];
+  g += `<text class="ch-tgt" x="${Math.min(last[0], W - pr - 4)}" y="${last[1] - 10}" text-anchor="end">${list[list.length - 1].overall}</text>`;
+  g += `<text class="ch-txt" x="${pl}" y="${H - 6}">First</text><text class="ch-txt" x="${W - pr}" y="${H - 6}" text-anchor="end">Latest</text>`;
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Overall score across your last ${list.length} conversations">${g}</svg>`;
+}
+function progressHTML(){
+  const list = scored().slice(-12).map(p => Object.assign({}, p, {overall:+p.overall || overallOf(p.scores)}));
+  if(!list.length) return "";
+  const last = list[list.length - 1], first = list[0];
+  const recent = list.slice(-3);
+  const avg = k => recent.reduce((a, p) => a + (+p.scores[k] || 0), 0) / recent.length;
+  const diff = last.overall - first.overall;
+  const usedT = list.reduce((a, p) => a + (+p.used || 0), 0), totT = list.reduce((a, p) => a + (+p.total || 0), 0);
+  return `<section class="panel">
+    <div class="fb-head"><h2 class="h3">Your progress</h2>${last.level ? `<span class="pill lvl-ok">Latest: ${esc(last.level)}</span>` : ""}</div>
+    <div class="metrics"><div><span class="k">Overall</span><span class="v">${last.overall}<small> / 100</small></span></div><div><span class="k">Since first</span><span class="v" style="color:${diff >= 0 ? "var(--good)" : "var(--bad)"}">${diff >= 0 ? "+" : ""}${diff}</span></div><div><span class="k">Conversations</span><span class="v">${scored().length}</span></div><div><span class="k">Mission items used</span><span class="v">${usedT}<small> / ${totT}</small></span></div></div>
+    ${list.length > 1 ? progressChart(list) : '<p class="muted" style="margin:0 0 6px;font-size:14px">Have another conversation to see your trend.</p>'}
+    <h3 class="h4">Skills · average of your last ${recent.length}</h3>
+    <ul class="bars skills">${SKILLS.map(([k, l]) => { const v = avg(k); return `<li class="bar-row"><span class="w">${l}</span><span class="bar-track"><span class="bar good" style="display:block;width:${Math.max(4, v * 20)}%"></span></span><span class="n">${v.toFixed(1)}</span></li>`; }).join("")}</ul>
+  </section>`;
+}
 function renderPartner(){
   setNav("partner");
   if(!chat) return renderPartnerSetup();
   renderChat();
 }
 function voiceName(){ const v = currentVoice(); return v ? v.name.replace(/^(Microsoft|Google)\s+/, "").replace(/\s*\(.*\)\s*/, " ").split(/\s+-\s+/)[0].trim() : "Browser default"; }
-function renderPartnerSetup(){
-  const past = S.partner.slice(-6).reverse();
-  app.innerHTML = `
-  <header class="page-head"><p class="eyebrow">Live practice</p><h1>Talk with your AI partner</h1>
-  <p class="lede">Pick a work situation. Your partner stays in character and pushes back like a real colleague, and answers out loud. After each message, a coach shows a more natural way to say it and flags grammar, word choice, tone and pronunciation.</p></header>
-  <div class="panel err no-ai-note">Add your Claude API key in <a href="#settings">Settings</a> to talk with your AI partner.</div>
-  <section class="panel">
-    <h2 class="h3">1 · Choose a situation</h2>
-    <ul class="scen-grid">${SCEN.map(s => `<li><button class="scen${s.id === partnerSetup.sid ? " on" : ""}" data-sid="${s.id}" aria-pressed="${s.id === partnerSetup.sid}"><span class="tt">${esc(s.name)}</span><span class="muted scen-who">${esc(s.who)}, ${esc(s.role)}</span><span class="scen-goal">${esc(s.goal)}</span><span class="scen-cards">Frames ${s.cards.join(" · ")}</span></button></li>`).join("")}</ul>
-  </section>
-  <div class="two">
-    <section class="panel">
-      <h2 class="h3">2 · How much correction?</h2>
-      <span class="seg-ctl" role="radiogroup" aria-label="Correction level">${CORR.map(([k, l]) => `<button role="radio" aria-checked="${partnerSetup.level === k}" data-level="${k}">${l}</button>`).join("")}</span>
-      <p class="muted" style="font-size:14px;margin:12px 0 0">“Just talk” keeps the conversation flowing and saves all corrections for the debrief.</p>
-    </section>
-    <section class="panel">
-      <h2 class="h3">3 · Talk out loud</h2>
-      <p style="margin:0 0 8px">Tap the microphone and speak. In <b>hands-free</b> mode your partner listens automatically after speaking, and your answer is sent when you pause.</p>
-      <label class="check"><input type="checkbox" id="pv-hf-setup"${handsFree ? " checked" : ""}> Hands-free conversation</label>
-      <p style="margin:12px 0 0">Partner's voice: <button class="btn ghost" id="pv-voice">${esc(voiceName())} · change</button></p>
-    </section>
-  </div>
-  <p class="muted" style="font-size:14px;margin:-8px 0 0;max-width:80ch">Pronunciation: after each message, tap <b>Say it</b> on the more natural version and read it aloud. Words the speech recogniser couldn't match are highlighted, so you can see which sounds to work on. Your coach also flags words the recogniser seems to have misheard.</p>
-  <div class="next-row"><button class="btn primary ai-only" id="pv-start">Start conversation with ${esc(scenOf(partnerSetup.sid).who)} →</button></div>
-  ${past.length ? `<section class="panel"><h2 class="h3">Recent conversations</h2><ul class="attempts">${past.map(p => `<li><span class="muted" style="font-size:13px">${new Date(p.at).toLocaleDateString(undefined, {day:"numeric", month:"short"})} · ${esc(scenOf(p.sid).name)} · ${+p.turns || 0} messages${p.level ? ` · <b style="color:var(--ink)">${esc(p.level)}</b>` : ""}</span>${p.summary ? `<p class="t">${esc(p.summary)}</p>` : ""}${arr(p.focus).length ? `<p class="muted" style="margin:4px 0 0;font-size:14px">Focus: ${arr(p.focus).map(esc).join(" · ")}</p>` : ""}</li>`).join("")}</ul></section>` : ""}`;
-  app.querySelectorAll("[data-sid]").forEach(b => b.onclick = () => { partnerSetup.sid = b.dataset.sid; renderPartnerSetup(); });
-  app.querySelectorAll("[data-level]").forEach(b => b.onclick = () => { partnerSetup.level = b.dataset.level; renderPartnerSetup(); });
-  $("#pv-hf-setup").onchange = e => { handsFree = e.target.checked; lsSet("framework-english-handsfree", handsFree); };
-  $("#pv-voice").onclick = () => { const vb = $("#voice-btn"); if(vb){ vb.click(); window.scrollTo({top:0, behavior:"smooth"}); } };
-  $("#pv-start").onclick = () => {
-    const s = scenOf(partnerSetup.sid);
-    chat = {sid:s.id, level:partnerSetup.level, msgs:[{role:"partner", text:s.open}], busy:false, report:null, at:Date.now()};
-    renderPartner();
-    speakReply(chat, s.open);
-  };
+function startChat(sid, targets){
+  const s = scenOf(sid);
+  chat = {sid:s.id, name:userName(), corr:pcorr(), level:plevel(), targets:targets || pickTargets(s.id, plevel()), msgs:[], busy:false, stage:"greeting", hint:"", ended:false, report:null, at:Date.now()};
+  partnerSetup.targets = null;
+  saveChat();
+  renderPartner();
+  runTurn(null);
 }
-function fbHTML(m){
-  if(m.pending) return '<div class="fbk muted">Coach is checking your message…</div>';
-  if(m.err) return `<div class="fbk err">${esc(m.err)}</div>`;
-  if(!m.fb || chat.level === "end") return "";
+function renderPartnerSetup(){
+  const lv = plevel();
+  if(!partnerSetup.targets || partnerSetup.targets.sid !== partnerSetup.sid || partnerSetup.targets.lv !== lv) partnerSetup.targets = {sid:partnerSetup.sid, lv, list:pickTargets(partnerSetup.sid, lv)};
+  const s = scenOf(partnerSetup.sid), resume = savedChat();
+  const recent = S.partner.slice(-5).reverse();
+  app.innerHTML = `
+  <header class="page-head"><p class="eyebrow">Live practice</p><h1>AI partner</h1>
+  <p class="lede">Have a real conversation on a work topic. Your partner greets you, talks it through and says goodbye, while you try to use your mission phrases.</p></header>
+  <div class="panel err no-ai-note">Add your Claude API key in <a href="#settings">Settings</a> to talk with your AI partner.</div>
+  ${resume ? `<section class="panel resume"><div style="flex:1;min-width:200px"><h2 class="h3">Continue your conversation?</h2><p class="muted" style="margin:0">${esc(scenOf(resume.sid).name)} with ${esc(scenOf(resume.sid).who)} · ${resume.msgs.filter(m => m.role === "me").length} of your messages so far</p></div><div class="row" style="margin:0"><button class="btn" id="pv-discard">Discard</button><button class="btn primary" id="pv-resume">Continue</button></div></section>` : ""}
+  ${progressHTML()}
+  <section class="panel">
+    <h2 class="h3">1 · Choose a topic</h2>
+    <ul class="scen-grid">${SCEN.map(x => `<li><button class="scen${x.id === partnerSetup.sid ? " on" : ""}" data-sid="${x.id}" aria-pressed="${x.id === partnerSetup.sid}"><span class="tt">${esc(x.name)}</span><span class="muted scen-who">${esc(x.who)}, ${esc(x.role)}</span><span class="scen-goal">${esc(x.goal)}</span></button></li>`).join("")}</ul>
+  </section>
+  <section class="panel">
+    <div class="fb-head"><h2 class="h3">2 · Your mission</h2><button class="btn ghost" id="pv-shuffle">Different phrases</button></div>
+    <p class="muted" style="margin:-2px 0 12px;font-size:14px">Try to use these naturally while you talk with ${esc(s.who)}. They tick off when you use them well.</p>
+    <ul class="mission-list">${partnerSetup.targets.list.map(t => `<li><span class="pill k-${t.kind}">${kindLabel(t.kind)}</span> <b>${esc(t.label)}</b><br><span class="muted">${esc(t.hint)}</span></li>`).join("")}</ul>
+  </section>
+  <details class="panel opts-panel">
+    <summary><b>Options</b> <span class="muted">· ${lv} phrases · ${pcorr() === "end" ? "feedback at the end" : "tips after each message"}${handsFree ? " · hands-free" : ""}</span></summary>
+    <label class="lbl" for="pv-name" style="margin-top:14px">Your first name <span class="muted">· so your partner can greet you</span></label>
+    <input id="pv-name" class="field" type="text" autocomplete="given-name" maxlength="40" value="${esc(userName())}" placeholder="e.g. Hai">
+    <p class="lbl" style="margin:14px 0 6px">Phrase level for your mission</p>
+    <span class="seg-ctl" role="radiogroup" aria-label="Phrase level">${["B1", "B2", "C1", "C2"].map(l => `<button role="radio" aria-checked="${lv === l}" data-plv="${l}">${l}</button>`).join("")}</span>
+    <p class="lbl" style="margin:14px 0 6px">Corrections</p>
+    <span class="seg-ctl" role="radiogroup" aria-label="Corrections">${CORR.map(([k, l]) => `<button role="radio" aria-checked="${pcorr() === k}" data-corr="${k}">${l}</button>`).join("")}</span>
+    <label class="check" style="margin-top:14px;display:flex"><input type="checkbox" id="pv-hf-setup"${handsFree ? " checked" : ""}> Hands-free: listen automatically after your partner speaks, send when you pause</label>
+    <p style="margin:12px 0 0">Partner's voice: <button class="btn ghost" id="pv-voice">${esc(voiceName())} · change</button></p>
+  </details>
+  <div class="start-row"><button class="btn primary ai-only start-btn" id="pv-start">Start talking with ${esc(s.who)}</button></div>
+  ${recent.length ? `<section class="panel"><h2 class="h3">Recent conversations</h2><ul class="attempts">${recent.map(p => `<li><span class="muted" style="font-size:13px">${new Date(p.at).toLocaleDateString(undefined, {day:"numeric", month:"short"})} · ${esc(scenOf(p.sid).name)} · ${+p.turns || 0} messages${p.level ? ` · <b style="color:var(--ink)">${esc(p.level)}</b>` : ""}${p.overall ? ` · ${+p.overall}/100` : ""}</span>${p.summary ? `<p class="t">${esc(p.summary)}</p>` : ""}</li>`).join("")}</ul></section>` : ""}`;
+  app.querySelectorAll("[data-sid]").forEach(b => b.onclick = () => { partnerSetup.sid = b.dataset.sid; renderPartnerSetup(); });
+  app.querySelectorAll("[data-plv]").forEach(b => b.onclick = () => { lsSet("framework-english-plevel", b.dataset.plv); renderPartnerSetup(); });
+  app.querySelectorAll("[data-corr]").forEach(b => b.onclick = () => { lsSet("framework-english-pcorr", b.dataset.corr); renderPartnerSetup(); });
+  $("#pv-name").addEventListener("change", e => lsSet("framework-english-name", e.target.value.trim().slice(0, 40)));
+  $("#pv-shuffle").onclick = () => { partnerSetup.targets = null; renderPartnerSetup(); };
+  $("#pv-hf-setup").onchange = e => { handsFree = e.target.checked; lsSet("framework-english-handsfree", handsFree); };
+  $("#pv-voice").onclick = () => { const vp = $("#voice-panel"); vp.hidden = false; $("#voice-btn").setAttribute("aria-expanded", "true"); loadVoices(); window.scrollTo({top:0, behavior:"smooth"}); };
+  $("#pv-start").onclick = () => { lsSet("framework-english-name", $("#pv-name").value.trim().slice(0, 40)); startChat(partnerSetup.sid, partnerSetup.targets.list); };
+  if(resume){
+    $("#pv-resume").onclick = () => { chat = Object.assign(resume, {busy:false, streaming:null}); renderPartner(); };
+    $("#pv-discard").onclick = () => { try{ localStorage.removeItem(CHAT_LS); }catch(e){} renderPartnerSetup(); };
+  }
+}
+
+/* ----- conversation view ----- */
+function fbHTML(m, idx){
+  if(m.pending) return '<div class="fbk-mini muted">Checking…</div>';
+  if(m.err) return `<div class="fbk err">${esc(m.err)} <button class="btn ghost" data-retry="${idx}">Try again</button></div>`;
+  if(!m.fb || chat.corr === "end") return "";
   const f = m.fb, issues = arr(f.issues).slice(0, 4), pron = arr(f.pronunciation).slice(0, 3);
   const nat = String(f.natural || "").trim();
-  const same = nat && nat.toLowerCase().replace(/[^a-z]/g, "") === m.text.toLowerCase().replace(/[^a-z]/g, "");
-  const fc = CARDS.find(x => x.id === String(f.frame || "").trim().toUpperCase());
+  const same = !nat || nat.toLowerCase().replace(/[^a-z]/g, "") === m.text.toLowerCase().replace(/[^a-z]/g, "");
+  const n = issues.length + pron.length + (same ? 0 : 1);
   const ipaFor = p => PRON.ipa[String(p.word || "").toLowerCase()] || String(p.ipa || "").replace(/[\/\[\]]/g, "");
-  return `<div class="fbk">
-    ${f.praise ? `<p class="praise"><span aria-hidden="true">✓</span> ${esc(f.praise)}</p>` : ""}
-    ${nat && !same ? `<div class="nat"><span class="lab">More natural</span><p class="frame-inline">${pronHTML(nat.replace(/[\[\]]/g, ""))}</p>${listenHTML(nat, "Hear it")}</div>` : (nat ? `<p class="lab ok-lab">Natural as it is.</p>` : "")}
+  if(!n) return `<div class="fbk-mini ok">✓ ${esc(f.praise || "Natural as it is.")}</div>`;
+  return `<details class="fbk-d"><summary><span class="tipcount">${n} tip${n > 1 ? "s" : ""}</span>${f.praise ? `<span class="muted"> · ${esc(f.praise)}</span>` : ""}</summary><div class="fbk">
+    ${!same ? `<div class="nat"><span class="lab">More natural</span><p class="frame-inline">${pronHTML(nat.replace(/[\[\]]/g, ""))}</p>${listenHTML(nat, "Hear it")}</div>` : ""}
     ${issues.length ? `<ul class="issues">${issues.map(i => `<li><span class="tag">${esc(i.type || "note")}</span> <s>${esc(i.original)}</s> → <b>${esc(i.better)}</b> <span class="muted">${esc(i.why)}</span></li>`).join("")}</ul>` : ""}
     ${pron.length ? `<div class="pron"><span class="lab">Pronunciation</span><ul class="ptips">${pron.map(p => `<li><button class="chip speak" data-say="${esc(p.word)}" data-rate="0.85">${esc(p.word)} <span class="mipa">/${fmtIPA(ipaFor(p))}/</span></button> <span class="muted">${esc(p.tip)}</span></li>`).join("")}</ul></div>` : ""}
-    ${fc ? `<a class="frame-link" href="${cardHref(fc)}">Frame to try next: Card ${fc.id} · ${esc(fc.t)} →</a>` : ""}
-  </div>`;
+  </div></details>`;
 }
 function msgsHTML(){
   const s = scenOf(chat.sid);
-  return chat.msgs.map(m => m.role === "partner"
+  let html = chat.msgs.map((m, i) => m.role === "partner"
     ? `<div class="msg partner"><div class="who">${esc(s.who)}</div><div class="bubble"><p class="frame-inline">${pronHTML(m.text.replace(/[\[\]]/g, ""))}</p></div><div class="msg-tools">${listenHTML(m.text)}</div></div>`
-    : `<div class="msg me"><div class="who">You</div><div class="bubble"><p>${esc(m.text)}</p></div>${fbHTML(m)}</div>`
-  ).join("") + (chat.busy && chat.streaming != null ? `<div class="msg partner"><div class="who">${esc(s.who)}</div><div class="bubble"><p class="frame-inline" id="pv-stream">${esc(chat.streaming)}</p></div></div>` : chat.busy && !chat.replied ? `<div class="msg partner"><div class="who">${esc(s.who)}</div><div class="bubble typing" aria-label="${esc(s.who)} is replying"><span></span><span></span><span></span></div></div>` : "");
+    : `<div class="msg me"><div class="who">${esc(chat.name || "You")}</div><div class="bubble"><p>${esc(m.text)}</p></div>${fbHTML(m, i)}</div>`).join("");
+  if(chat.busy && chat.streaming != null) html += `<div class="msg partner"><div class="who">${esc(s.who)}</div><div class="bubble"><p class="frame-inline" id="pv-stream">${esc(chat.streaming)}</p></div></div>`;
+  else if(chat.busy && !chat.replied) html += `<div class="msg partner"><div class="who">${esc(s.who)}</div><div class="bubble typing" aria-label="${esc(s.who)} is replying"><span></span><span></span><span></span></div></div>`;
+  if(chat.openErr) html += `<div class="fbk err">${esc(chat.openErr)} <button class="btn ghost" data-retry="open">Try again</button></div>`;
+  if(chat.ended && !chat.report) html += `<div class="ended-note">${chat.assessing ? "Conversation finished. Your coach is preparing your assessment…" : chat.reportErr ? esc(chat.reportErr) + ' <button class="btn ghost" id="pv-retry-report">Try again</button>' : "Conversation finished."}</div>`;
+  return html;
+}
+function missionHTML(){
+  const done = chat.targets.filter(t => t.status === "used").length;
+  return `<div class="mission-head"><span class="lab" style="margin:0">Mission · ${done} / ${chat.targets.length}</span><span class="muted mission-note" id="pv-mnote">Tap a phrase for a reminder</span></div>
+    <div class="mission-chips">${chat.targets.map((t, i) => `<button class="mchip ${t.status || "todo"}" data-mt="${i}" title="${esc(t.hint)}"><span class="mi" aria-hidden="true">${t.status === "used" ? "✓" : t.status === "misused" ? "!" : "○"}</span>${esc(t.label)}</button>`).join("")}</div>`;
+}
+function stageHTML(){
+  const cur = Math.max(0, STAGES.findIndex(x => x[0] === (chat.ended ? "goodbye" : chat.stage)));
+  return `<ol class="stages" aria-label="Conversation stage">${STAGES.map(([k, l], i) => `<li class="${i < cur ? "done" : i === cur ? "cur" : ""}">${l}</li>`).join("")}</ol>`;
 }
 function drawChat(scroll){
-  const box = $("#chat"); if(!box) return;
+  const box = $("#chat"); if(!box || !chat) return;
   box.innerHTML = msgsHTML();
   wireSpeak(box);
+  const mb = $("#pv-mission"); if(mb) mb.innerHTML = missionHTML();
+  const sb = $("#pv-stages"); if(sb) sb.innerHTML = stageHTML();
   const send = $("#pv-send"); if(send) send.disabled = !!chat.busy;
+  const form = $("#pv-form"); if(form) form.hidden = !!chat.ended;
+  const rr = $("#pv-retry-report"); if(rr) rr.onclick = () => endChat(true);
   if(scroll){ const last = box.lastElementChild; if(last && last.scrollIntoView) last.scrollIntoView({block:"end", behavior:"smooth"}); }
 }
 function renderChat(){
   const s = scenOf(chat.sid);
-  const lvl = (CORR.find(x => x[0] === chat.level) || CORR[0])[1];
   app.innerHTML = `
   <header class="panel chat-head">
     <div class="chat-title">
       <span class="avatar" aria-hidden="true">${esc(s.who[0])}</span>
-      <div><p class="eyebrow" style="margin-bottom:4px">${esc(s.name)} · ${esc(lvl)}</p><h1 class="h2">${esc(s.who)} <span class="muted" style="font-weight:500">· ${esc(s.role)}</span></h1><p class="muted" style="margin:4px 0 0">Your goal: ${esc(s.goal)}</p></div>
+      <div style="flex:1;min-width:0"><h1 class="h2">${esc(s.who)}</h1><p class="muted" style="margin:2px 0 0;font-size:14px">${esc(s.role)} · ${esc(s.name)}</p></div>
+      ${chat.report ? "" : `<button class="btn end-btn" id="pv-end">End</button>`}
     </div>
-    <div class="row" style="margin-top:14px">
-      <label class="check"><input type="checkbox" id="pv-hf"${handsFree ? " checked" : ""}> Hands-free</label>
-      <label class="check"><input type="checkbox" id="pv-auto"${autoSpeak ? " checked" : ""}> Speak replies aloud</label>
-      <button class="btn ghost" id="pv-voice2">Voice: ${esc(voiceName())}</button>
-      <span class="spacer"></span>
-      <button class="btn ghost" id="pv-new">New conversation</button>
-      <button class="btn" id="pv-end">Finish and get feedback</button>
+    <div id="pv-stages">${stageHTML()}</div>
+    <div class="end-menu" id="pv-endmenu" hidden>
+      <p style="margin:0 0 10px"><b>End this conversation?</b></p>
+      <div class="row" style="margin:0"><button class="btn primary" id="pv-finish">Finish and get my assessment</button><button class="btn" id="pv-leave">Leave without feedback</button><button class="btn ghost" id="pv-keep">Keep talking</button></div>
     </div>
-    <details class="frames-help"><summary>Frames for this situation</summary>${s.cards.map(id => { const c = CARDS.find(x => x.id === id); return c ? `<div class="fh"><a href="${cardHref(c)}"><b>Card ${c.id} · ${esc(c.t)}</b></a><p class="frame-inline">${slotify(frameText(c))}</p></div>` : ""; }).join("")}</details>
+    <div class="mission" id="pv-mission">${missionHTML()}</div>
   </header>
   <section class="chat" id="chat" aria-live="polite"></section>
   <div id="pv-report"></div>
-  <form class="composer" id="pv-form"${chat.report ? " hidden" : ""}>
-    <label for="pv-say" class="visually-hidden">Your reply</label>
+  <form class="composer" id="pv-form"${chat.ended ? " hidden" : ""}>
     <button type="button" class="mic" id="pv-mic" aria-pressed="false" aria-label="Speak your reply">${MIC_SVG}</button>
     <textarea id="pv-say" rows="2" placeholder="Tap the microphone and speak, or type here."></textarea>
     <button class="btn primary" id="pv-send" type="submit">Send</button>
+    <div class="composer-foot"><button type="button" class="hint-btn" id="pv-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V17h6v-.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z"/></svg>Hint</button><label class="check small"><input type="checkbox" id="pv-hf"${handsFree ? " checked" : ""}> Hands-free</label><label class="check small"><input type="checkbox" id="pv-auto"${autoSpeak ? " checked" : ""}> Voice</label></div>
     <p class="mic-status" id="pv-mic-status" aria-live="polite"></p>
   </form>`;
   drawChat(false);
   if(chat.report) $("#pv-report").innerHTML = reportHTML(chat.report);
   wireSpeak(app);
-  $("#pv-hf").onchange = e => { handsFree = e.target.checked; lsSet("framework-english-handsfree", handsFree); if(handsFree && !Mic.active && !chat.busy && !chat.report) pvMicStart(); else if(!handsFree) setMicUI(); };
+  const endBtn = $("#pv-end");
+  if(endBtn) endBtn.onclick = () => { const m = $("#pv-endmenu"); m.hidden = !m.hidden; };
+  $("#pv-keep").onclick = () => { $("#pv-endmenu").hidden = true; };
+  $("#pv-finish").onclick = () => { $("#pv-endmenu").hidden = true; endChat(false); };
+  $("#pv-leave").onclick = () => { try{ speechSynthesis.cancel(); }catch(e){} if(Mic.active) micStop(false); chat = null; saveChat(); renderPartner(); window.scrollTo(0, 0); };
+  $("#pv-mission").addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-mt]"); if(!b) return; const t = chat.targets[+b.dataset.mt]; const n = $("#pv-mnote"); if(n && t) n.textContent = `${t.label}: ${t.hint}`; });
+  $("#chat").addEventListener("click", e => {
+    const r = e.target.closest && e.target.closest("[data-retry]"); if(!r || chat.busy) return;
+    if(r.dataset.retry === "open"){ chat.openErr = null; runTurn(null); return; }
+    const i = +r.dataset.retry, m = chat.msgs[i];
+    if(m && m.role === "me"){ chat.msgs.splice(i, 1); runTurn(m.text, m.conf); }
+  });
+  $("#pv-hint").onclick = () => micStatus(chat.hint ? "Idea: " + chat.hint : "Say what you think, then ask " + scenOf(chat.sid).who + " a question back.");
+  $("#pv-hf").onchange = e => { handsFree = e.target.checked; lsSet("framework-english-handsfree", handsFree); if(handsFree && !Mic.active && !chat.busy && !chat.ended) pvMicStart(); else setMicUI(); };
   $("#pv-mic").onclick = () => { if(Mic.active && Mic.owner === "pv") micStop(handsFree); else pvMicStart(); };
   setMicUI();
   $("#pv-auto").onchange = e => { autoSpeak = e.target.checked; lsSet("framework-english-autospeak", autoSpeak); if(!autoSpeak) try{ speechSynthesis.cancel(); }catch(err){} };
-  $("#pv-voice2").onclick = () => { const vb = $("#voice-btn"); if(vb){ vb.click(); window.scrollTo({top:0, behavior:"smooth"}); } };
-  $("#pv-new").onclick = () => { try{ speechSynthesis.cancel(); }catch(e){} if(Mic.active) micStop(false); chat = null; renderPartner(); };
-  $("#pv-end").onclick = () => endChat();
   const ta = $("#pv-say");
   ta.addEventListener("keydown", e => { if(e.key === "Enter" && !e.shiftKey && !e.isComposing){ e.preventDefault(); $("#pv-form").requestSubmit ? $("#pv-form").requestSubmit() : $("#pv-send").click(); } });
-  $("#pv-form").addEventListener("submit", e => { e.preventDefault(); if(Mic.active && Mic.owner === "pv") micStop(false); const t = ta.value.trim(); if(!t || chat.busy) return; ta.value = ""; sendTurn(t, lastConf); lastConf = null; });
+  $("#pv-form").addEventListener("submit", e => { e.preventDefault(); if(Mic.active && Mic.owner === "pv") micStop(false); const t = ta.value.trim(); if(!t || chat.busy || chat.ended) return; ta.value = ""; sendTurn(t, lastConf); lastConf = null; });
 }
-async function sendTurn(text, conf){
-  const me = {role:"me", text, pending:true, conf:conf || null};
-  chat.msgs.push(me); chat.busy = true; chat.streaming = null; chat.replied = false;
+function afterSpeech(cb){
+  let n = 0;
+  const tick = () => { let speaking = false; try{ speaking = autoSpeak && speechSynthesis.speaking; }catch(e){} if(speaking && n++ < 120) setTimeout(tick, 300); else cb(); };
+  setTimeout(tick, 400);
+}
+const sendTurn = (t, conf) => runTurn(t, conf);
+async function runTurn(text, conf){
+  const mine = chat; if(!mine || mine.ended) return;
+  const opening = text == null;
+  let me = null;
+  if(!opening){
+    me = {role:"me", text, pending:true, conf:conf || null};
+    mine.msgs.push(me);
+    S.attempts.push({card:"AI", text, at:Date.now(), wc:wordsOf(text).length}); S.attempts = S.attempts.slice(-80); persist();
+  }
+  mine.busy = true; mine.streaming = null; mine.replied = false; mine.openErr = null;
   try{ speechSynthesis.cancel(); }catch(e){}
-  drawChat(true);
-  S.attempts.push({card:"AI", text, at:Date.now(), wc:wordsOf(text).length}); S.attempts = S.attempts.slice(-80); persist();
-  const mine = chat;
   const here = () => chat === mine && location.hash === "#partner";
+  if(here()) drawChat(true);
   const onReply = r => {
     if(mine.replied) return;
     mine.replied = true; mine.streaming = null;
@@ -2573,7 +2780,7 @@ async function sendTurn(text, conf){
     if(here()){ drawChat(true); speakReply(mine, r); }
   };
   try{
-    const res = await claudeCall(partnerPrompt(mine, text, conf), {maxTokens:1400, onText: full => {
+    const res = await claudeCall(convPrompt(mine, text, conf), {maxTokens:opening ? 400 : 1500, onText: full => {
       if(mine.replied) return;
       const a = full.indexOf("<reply>"); if(a < 0) return;
       const b = full.indexOf("</reply>", a);
@@ -2586,57 +2793,81 @@ async function sendTurn(text, conf){
       onReply(full.slice(a + 7, b).trim());
     }});
     const full = res.text || "";
-    if(!mine.replied){
-      let r = ""; const m = full.match(/<reply>([\s\S]*?)<\/reply>/);
-      if(m) r = m[1].trim(); else { try{ const j = parseJSON(full); r = String(j.reply || ""); }catch(e){} }
-      if(r) onReply(r);
+    if(!mine.replied){ const m = full.match(/<reply>([\s\S]*?)<\/reply>/); const r = m ? m[1].trim() : ""; if(r) onReply(r); }
+    let meta = {};
+    const mm = full.match(/<meta>([\s\S]*?)(?:<\/meta>|$)/);
+    try{ meta = parseJSON(mm ? mm[1] : "{}"); }catch(e){ meta = {}; }
+    if(me){
+      let fb = {};
+      const fm = full.match(/<feedback>([\s\S]*?)(?:<\/feedback>|$)/);
+      try{ fb = fm ? parseJSON(fm[1]) : {}; }catch(e){ fb = {}; }
+      me.pending = false; me.fb = fb;
+      if(!mine.replied) me.err = "Your partner's answer came back empty. Try again.";
     }
-    let fb = {};
-    const fm = full.match(/<feedback>([\s\S]*?)(?:<\/feedback>|$)/);
-    try{ fb = parseJSON(fm ? fm[1] : full); if(fb && fb.feedback && typeof fb.feedback === "object") fb = fb.feedback; }catch(e){ fb = {}; }
-    me.pending = false; me.fb = fb; mine.busy = false; mine.streaming = null;
+    if(STAGES.some(x => x[0] === meta.stage)) mine.stage = meta.stage;
+    if(meta.hint) mine.hint = String(meta.hint).slice(0, 200);
+    arr(meta.used).forEach(id => { const t = mine.targets.find(x => x.tid === String(id)); if(t && t.status !== "used"){ t.status = "used"; markTarget(t, true); } });
+    arr(meta.misused).forEach(id => { const t = mine.targets.find(x => x.tid === String(id)); if(t && t.status === ""){ t.status = "misused"; markTarget(t, false); } });
+    mine.busy = false; mine.streaming = null;
+    if(meta.end === true && mine.replied && !opening){ mine.ended = true; if(Mic.active) micStop(false); }
+    if(opening && !mine.replied) mine.openErr = "Your partner didn't start the conversation. Try again.";
+    saveChat();
     if(here()) drawChat(false);
-    if(!mine.replied){ me.err = "Your partner's answer came back empty. Try sending again."; if(here()) drawChat(true); }
+    if(mine.ended) afterSpeech(() => { if(chat === mine && !mine.report && !mine.assessing) endChat(true); });
   }catch(e){
-    me.pending = false; me.err = aiError(e); mine.busy = false; mine.streaming = null;
+    mine.busy = false; mine.streaming = null;
+    if(me){ me.pending = false; me.err = aiError(e); } else mine.openErr = aiError(e);
     if(here()) drawChat(true);
   }
 }
-async function endChat(){
-  const turns = chat.msgs.filter(m => m.role === "me").length;
-  const out = $("#pv-report");
-  if(turns < 2){ out.innerHTML = '<div class="panel err">Send at least two messages first, so the coach has something to review.</div>'; return; }
-  if(chat.busy) return;
-  try{ speechSynthesis.cancel(); }catch(e){}
-  out.innerHTML = '<section class="panel"><p class="muted" style="margin:0">Your coach is reviewing the whole conversation…</p></section>';
-  out.scrollIntoView && out.scrollIntoView({block:"nearest", behavior:"smooth"});
-  const mine = chat;
+async function endChat(auto){
+  const mine = chat; if(!mine || mine.assessing) return;
+  if(mine.busy && !auto) return;
+  const turns = mine.msgs.filter(m => m.role === "me").length;
+  if(Mic.active) micStop(false);
+  if(!auto) try{ speechSynthesis.cancel(); }catch(e){}
+  if(turns < 1){ chat = null; saveChat(); renderPartner(); return; }
+  mine.ended = true; mine.assessing = true; mine.reportErr = null;
+  saveChat();
+  if(chat === mine) renderChat();
+  const box = $("#chat"); if(box && box.lastElementChild && box.lastElementChild.scrollIntoView) box.lastElementChild.scrollIntoView({block:"end", behavior:"smooth"});
   try{
     const r = await askJSON(reportPrompt(mine));
-    mine.report = r;
-    S.partner.push({at:Date.now(), sid:mine.sid, turns, level:String(r.level || "").slice(0, 8), summary:String(r.summary || "").slice(0, 400), focus:arr(r.focus).map(f => String(f.area || "")).filter(Boolean).slice(0, 4)});
-    S.partner = S.partner.slice(-20); persist();
-    if(chat === mine) renderChat();
-    const rep = $("#pv-report"); if(rep && rep.scrollIntoView) rep.scrollIntoView({block:"start", behavior:"smooth"});
-  }catch(e){ out.innerHTML = `<div class="panel err">${esc(aiError(e))}</div>`; }
+    const sc = {}; SKILLS.forEach(([k]) => { sc[k] = Math.max(1, Math.min(5, Math.round(+((r.scores || {})[k]) || 3))); });
+    r.scores = sc;
+    mine.report = r; mine.assessing = false;
+    const used = mine.targets.filter(t => t.status === "used").length;
+    S.partner.push({at:Date.now(), sid:mine.sid, turns, level:String(r.level || "").slice(0, 8), scores:sc, overall:overallOf(sc), used, total:mine.targets.length, summary:String(r.summary || "").slice(0, 400), focus:arr(r.focus).map(f => String(f.area || "")).filter(Boolean).slice(0, 4)});
+    S.partner = S.partner.slice(-30); persist();
+    saveChat();
+    if(chat === mine){ renderChat(); const rep = $("#pv-report"); if(rep && rep.scrollIntoView) rep.scrollIntoView({block:"start", behavior:"smooth"}); }
+  }catch(e){
+    mine.assessing = false; mine.reportErr = aiError(e);
+    if(chat === mine) drawChat(true);
+  }
 }
 function reportHTML(r){
-  const cards = arr(r.cards).map(x => CARDS.find(c => c.id === String(x).trim().toUpperCase())).filter(Boolean);
+  const sc = r.scores || {};
+  const overall = overallOf(sc);
+  const prev = scored().slice(0, -1).slice(-1)[0];
+  const delta = prev ? overall - (+prev.overall || overallOf(prev.scores)) : null;
   return `<section class="panel report">
-    <div class="fb-head"><h2 class="h3">Conversation debrief</h2>${r.level ? `<span class="pill lvl-ok">${esc(r.level)}</span>` : ""}</div>
-    ${r.summary ? `<p style="margin:0 0 6px;max-width:70ch">${esc(r.summary)}</p>` : ""}
+    <div class="score-hero"><div class="ring" style="--p:${overall}"><span>${overall}</span></div><div><h2 class="h3" style="margin:0 0 4px">Your assessment</h2><p class="muted" style="margin:0">${r.level ? `Level in this conversation: <b style="color:var(--ink)">${esc(r.level)}</b>` : ""}${delta != null ? ` · <b style="color:${delta >= 0 ? "var(--good)" : "var(--bad)"}">${delta >= 0 ? "+" : ""}${delta}</b> vs last time` : ""}</p></div></div>
+    <ul class="bars skills">${SKILLS.map(([k, l]) => `<li class="bar-row"><span class="w">${l}</span><span class="bar-track"><span class="bar good" style="display:block;width:${(+sc[k] || 0) * 20}%"></span></span><span class="n">${+sc[k] || 0}/5</span></li>`).join("")}</ul>
+    ${r.summary ? `<p style="margin:14px 0 0;max-width:70ch">${esc(r.summary)}</p>` : ""}
+    <h3 class="h4">Mission</h3>
+    <ul class="mission-list">${chat.targets.map(t => `<li class="m-${t.status || "todo"}"><span class="mi">${t.status === "used" ? "✓" : t.status === "misused" ? "!" : "○"}</span> <b>${esc(t.label)}</b> <span class="muted">· ${t.status === "used" ? "used well" : t.status === "misused" ? "tried, needs work" : "not used"}</span></li>`).join("")}</ul>
     ${arr(r.strengths).length ? `<h3 class="h4">What went well</h3><ul class="tips">${arr(r.strengths).map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
-    ${arr(r.focus).length ? `<h3 class="h4">Work on next</h3><table class="vocab"><thead><tr><th>Area</th><th>You said</th><th>Try</th></tr></thead><tbody>${arr(r.focus).map(f => `<tr><td><b>${esc(f.area)}</b></td><td><s>${esc(f.example)}</s></td><td>${esc(f.better)}</td></tr>`).join("")}</tbody></table>` : ""}
+    ${arr(r.focus).length ? `<h3 class="h4">Work on next</h3><ul class="focus-list">${arr(r.focus).map(f => `<li><b>${esc(f.area)}</b><br><s>${esc(f.example)}</s><br><span class="frame-inline">${esc(f.better)}</span></li>`).join("")}</ul>` : ""}
     ${arr(r.words).length ? `<h3 class="h4">Words to practise saying</h3><ul class="ptips">${arr(r.words).map(w => `<li><button class="chip speak" data-say="${esc(w.word)}" data-rate="0.85">${esc(w.word)} <span class="mipa">/${fmtIPA(PRON.ipa[String(w.word || "").toLowerCase()] || String(w.ipa || "").replace(/[\/\[\]]/g, ""))}/</span></button> <span class="muted">${esc(w.tip)}</span></li>`).join("")}</ul>` : ""}
-    ${cards.length ? `<h3 class="h4">Cards to review</h3><div class="chips">${cards.map(c => `<a class="chip" href="${cardHref(c)}">Card ${c.id} · ${esc(c.t)}</a>`).join("")}</div>` : ""}
-    ${r.next ? `<p class="note"><b>Next conversation:</b> ${esc(r.next)}</p>` : ""}
-    <div class="next-row" style="margin-top:16px"><button class="btn" id="pv-again">Same situation again</button><button class="btn primary" id="pv-other">Choose another situation</button></div>
+    ${r.next ? `<p class="note"><b>Next time:</b> ${esc(r.next)}</p>` : ""}
+    <div class="next-row" style="margin-top:16px"><button class="btn" id="pv-again">Same topic, new mission</button><button class="btn primary" id="pv-other">Choose another topic</button></div>
   </section>`;
 }
 document.addEventListener("click", e => {
   const t = e.target;
-  if(t.id === "pv-again" && chat){ const s = scenOf(chat.sid); chat = {sid:s.id, level:chat.level, msgs:[{role:"partner", text:s.open}], busy:false, report:null, at:Date.now()}; renderPartner(); speakReply(chat, s.open); }
-  if(t.id === "pv-other"){ chat = null; renderPartner(); window.scrollTo(0, 0); }
+  if(t.id === "pv-again" && chat){ const sid = chat.sid; chat = null; saveChat(); startChat(sid); }
+  if(t.id === "pv-other"){ chat = null; saveChat(); renderPartner(); window.scrollTo(0, 0); }
 });
 
 /* ---------------- routing + boot ---------------- */
