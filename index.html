@@ -234,6 +234,19 @@ mark.hl{background:color-mix(in srgb,var(--accent) 15%,transparent);color:inheri
 .promo:hover{border-color:var(--accent)}
 .promo .h3{margin:0 0 4px}
 @media (max-width: 720px){ .lv-row{grid-template-columns:1fr 1fr} .phr-list{grid-template-columns:1fr} }
+/* natural english */
+.fchips{display:flex;gap:6px;flex-wrap:wrap}
+.fchip{font:600 14px/1.2 var(--body);padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.fchip:hover{border-color:var(--accent)}
+.fchip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.pill.reg-casual{background:color-mix(in srgb,var(--s2) 16%,transparent);color:var(--s2)}
+.pill.reg-neutral{background:color-mix(in srgb,var(--muted) 15%,transparent);color:var(--muted)}
+.pill.reg-formal{background:color-mix(in srgb,var(--s0) 16%,transparent);color:var(--s0)}
+.phr-ex2{margin:2px 0 0;font-size:15.5px;color:var(--muted);display:flex;gap:8px;align-items:baseline}
+.icon-btn{flex:none;width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;font-size:10px;display:inline-grid;place-items:center}
+.icon-btn:hover{border-color:var(--accent)}
+.stiff{font:400 19px/1.5 var(--frame);margin:0;padding:10px 14px;border-left:3px solid var(--muted);background:color-mix(in srgb,var(--muted) 7%,var(--surface));border-radius:0 9px 9px 0;color:var(--muted)}
+@media (max-width: 720px){ .fchips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -4px;padding:0 4px 2px} .fchips::-webkit-scrollbar{display:none} .fchip{white-space:nowrap} }
 #voice-btn{margin-left:0}
 #voice-btn-name{max-width:14ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .voice-panel{flex-basis:100%;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;max-width:620px;margin-left:auto}
@@ -433,6 +446,7 @@ q{font-family:var(--frame);font-style:italic}
     <a href="#library" data-nav="library">Library</a>
     <a href="#partner" data-nav="partner">AI partner</a>
     <a href="#phrases" data-nav="phrases">Phrases</a>
+    <a href="#natural" data-nav="natural">Natural English</a>
     <a href="#review" data-nav="review">Review <span class="badge" id="due-badge"></span></a>
     <a href="#radar" data-nav="radar">Repetition radar</a>
     <a href="#settings" data-nav="settings">Settings</a>
@@ -674,7 +688,8 @@ function normalize(x){
     progress:(x.progress && typeof x.progress === "object") ? x.progress : {},
     attempts:Array.isArray(x.attempts) ? x.attempts.filter(a => a && typeof a.text === "string" && typeof a.card === "string").slice(-80) : [],
     partner:Array.isArray(x.partner) ? x.partner.filter(s => s && typeof s === "object").slice(-20) : [],
-    phr:(x.phr && typeof x.phr === "object" && !Array.isArray(x.phr)) ? x.phr : {}};
+    phr:(x.phr && typeof x.phr === "object" && !Array.isArray(x.phr)) ? x.phr : {},
+    nat:(x.nat && typeof x.nat === "object" && !Array.isArray(x.nat)) ? x.nat : {}};
 }
 function lsGet(k){ try{ const r = localStorage.getItem(k); return r ? JSON.parse(r) : null; }catch(e){ return null; } }
 function lsSet(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
@@ -928,6 +943,7 @@ function renderLibrary(){
     <a class="btn primary" href="${cardHref(next)}">${due.length ? "Review" : (practised ? "Continue" : "Start")} with Card ${next.id} →</a>
   </section>
   <a class="panel promo" href="#phrases"><div style="flex:1;min-width:220px"><h2 class="h3">Collocations & phrasal verbs</h2><p class="muted" style="margin:0">${PHR.length} work phrases from B1 to C2 · ${PHR.filter(isMastered).length} mastered${phrDue().length ? ` · <b style="color:var(--warn)">${phrDue().length} due</b>` : ""}</p></div><span class="btn">Practise phrases →</span></a>
+  <a class="panel promo" href="#natural"><div style="flex:1;min-width:220px"><h2 class="h3">Natural English</h2><p class="muted" style="margin:0">${NAT.length} phrases and structures native speakers use every day · ${NAT.filter(natMastered).length} mastered${natDue().length ? ` · <b style="color:var(--warn)">${natDue().length} due</b>` : ""}</p></div><span class="btn">Sound more natural →</span></a>
   <section class="library">
     ${GROUPS.map(g => `<div class="group"><h2>${g.name}</h2><p class="muted">${g.desc}</p><ul class="tiles">${CARDS.filter(c => c.g === g.name).map(tile).join("")}</ul></div>`).join("")}
   </section>`;
@@ -1237,6 +1253,7 @@ function renderReview(){
   <header class="page-head"><p class="eyebrow">Spaced review</p><h1>${due.length ? due.length + " card" + (due.length > 1 ? "s" : "") + " due today" : "Nothing due today"}</h1>
   <p class="lede">Cards come back just before you would forget them: after 1, 3, 7, 14, 30 and 60 days. Rate a card after you practise it to schedule it.</p></header>
   ${phrDue().length ? `<a class="panel promo" href="#phrases"><div style="flex:1"><h2 class="h3">${phrDue().length} phrase${phrDue().length > 1 ? "s" : ""} due</h2><p class="muted" style="margin:0">Collocations and phrasal verbs you're learning.</p></div><span class="btn primary" data-phr-quiz>Practise phrases</span></a>` : ""}
+  ${natDue().length ? `<a class="panel promo" href="#natural"><div style="flex:1"><h2 class="h3">${natDue().length} natural English pattern${natDue().length > 1 ? "s" : ""} due</h2><p class="muted" style="margin:0">Phrases and structures you're learning.</p></div><span class="btn primary" data-nat-quiz>Practise patterns</span></a>` : ""}
   ${due.length ? `<section><h2 class="h3">Due now</h2><ul class="rlist">${due.map(c => row(c, `<a class="btn primary" href="${cardHref(c)}" data-pr="${c.id}">Practise</a>`)).join("")}</ul></section>` : ""}
   <section><h2 class="h3">Coming up</h2>${sched.length ? `<ul class="rlist">${sched.map(c => row(c, `<a class="btn" href="${cardHref(c)}">Open</a>`)).join("")}</ul>` : '<div class="panel empty"><p style="margin:0">No cards scheduled yet. Practise a card and rate it Hard, Good or Easy to add it here.</p></div>'}</section>
   ${fresh.length ? `<section><h2 class="h3">Not scheduled yet <span class="muted" style="font:500 15px var(--body)">· ${fresh.length}</span></h2><ul class="rlist">${fresh.map(c => row(c, `<a class="btn" href="${cardHref(c)}">Open</a>`)).join("")}</ul></section>` : ""}`;
@@ -1935,6 +1952,258 @@ function useResultHTML(v){
   </section>`;
 }
 
+/* ---------------- natural English: common phrases and structures ---------------- */
+const NCATS = [
+ ["react", "Reacting and listening"], ["opinion", "Giving opinions"], ["soften", "Softening"], ["time", "Buying time"],
+ ["agree", "Agreeing and disagreeing"], ["link", "Linking ideas"], ["emph", "Emphasis"], ["adv", "Advanced structures"],
+ ["offer", "Offers and requests"], ["vague", "Vague language"]
+];
+/* [category, level, pattern, register, when natives use it, [examples], blank (in first example), wrong options, stiff textbook version, typical learner mistake] */
+const NAT_RAW = [
+ ["react","B1","That makes sense.","neutral","Show you understand someone's reasoning.",["Oh, that makes sense. I didn't know the vendor had changed.","Right, that makes sense now."],"makes sense",["does sense","has sense"],"I understand your logic regarding the vendor change.","Oh, that's make sense. I didn't know the vendor had changed."],
+ ["react","B2","Fair enough.","neutral","Accept someone's point, even if you don't fully agree.",["Fair enough. Let's go with your plan, then.","Fair enough, I hadn't thought of that."],"Fair enough",["Fair sufficient","Right enough"],"I accept your argument. We shall proceed with your plan.","It is fair enough for me. Let's go with your plan, then."],
+ ["react","B2","Tell me about it.","casual","Agree strongly about something annoying you've both experienced.",["Tell me about it. I spent an hour on that printer yesterday.","Tell me about it. The traffic was awful this morning."],"Tell me about it",["Say me about it","Tell me it"],"I strongly agree with your complaint about the printer.","Say me about it. I spent an hour on that printer yesterday."],
+ ["react","B2","No wonder …","neutral","Say something isn't surprising now that you know the reason.",["No wonder the numbers looked strange. The filter was off.","No wonder you're tired. You've been here since seven."],"No wonder",["Not wonder","No wondering"],"It is not surprising that the numbers looked strange, as the filter was off.","Not wonder the numbers looked strange. The filter was off."],
+ ["react","B1","Sounds good.","casual","Agree to a plan or suggestion quickly.",["Sounds good. See you at three.","Sounds good to me. Let's do that."],"Sounds good",["It's sound good","Sounding good"],"That plan is acceptable to me. I will see you at three.","It's sound good. See you at three."],
+
+ ["opinion","B2","If you ask me, …","casual","Give your honest personal opinion informally.",["If you ask me, we're moving too fast.","If you ask me, the old design was better."],"If you ask me",["If you ask to me","If asking me"],"In my personal opinion, we are proceeding too rapidly.","If you ask to me, we're moving too fast."],
+ ["opinion","B2","The way I see it, …","neutral","Introduce how you understand a situation.",["The way I see it, we have two options.","The way I see it, the client wants speed, not features."],"The way I see it",["The way how I see it","The way I look"],"From my perspective, there exist two options.","The way how I see it, we have two options."],
+ ["opinion","B1","I'd say …","neutral","Give a soft opinion or a rough estimate.",["I'd say it'll take about two weeks.","I'd say the second option is safer."],"I'd say",["I'd tell","I'd speak"],"My estimation is that it will require approximately two weeks.","I'd tell it'll take about two weeks."],
+ ["opinion","B1","To be honest, …","neutral","Signal that you're giving a frank, maybe unwelcome, view.",["To be honest, I'm not sure it's worth it.","To be honest, I prefer the first version."],"To be honest",["For honest","To honestly"],"Honestly speaking, I am not certain of its value.","For be honest, I'm not sure it's worth it."],
+ ["opinion","C1","I'm not convinced (that) …","neutral","Express polite doubt about an idea.",["I'm not convinced that this will save us time.","I'm still not convinced it's the right moment."],"convinced",["convicted","convincing"],"I doubt the validity of the claim that this will save time.","I'm not convincing that this will save us time."],
+
+ ["soften","B1","I was wondering if you could …","neutral","Make a request sound very polite.",["I was wondering if you could send me the slides.","I was wondering if you could help me with something."],"was wondering if",["am wonder if","wondered that"],"I request that you send me the slides.","I wonder you can send me the slides."],
+ ["soften","B2","a bit / slightly","neutral","Make a negative point sound less harsh.",["The deadline is a bit tight.","The second draft is slightly too long."],"a bit",["a few","a little bit of"],"The deadline is insufficient.","The deadline is a few tight."],
+ ["soften","C1","It might be worth + -ing","neutral","Make a gentle suggestion.",["It might be worth checking with legal first.","It might be worth asking the client directly."],"worth checking",["worth to check","worthy checking"],"You must check with the legal department first.","It might be worth to check with legal first."],
+ ["soften","B2","I'm not sure that's the best idea.","neutral","Disagree softly with a suggestion.",["I'm not sure that's the best idea right now.","Hmm, I'm not sure that's the best idea for this client."],"not sure",["not secure","no sure"],"That idea is bad.","I'm no sure that's the best idea right now."],
+ ["soften","B1","Would you mind + -ing?","neutral","Ask someone politely to do something.",["Would you mind sharing your screen?","Would you mind sending that again?"],"mind sharing",["mind to share","mind share"],"Share your screen now.","Would you mind to share your screen?"],
+ ["soften","B2","kind of / sort of","casual","Make a statement less strong or less exact.",["It's kind of complicated, to be honest.","We sort of agreed, but nothing's final."],"kind of",["kind a","kinds of"],"It is complicated to a certain degree.","It's kinds of complicated, to be honest."],
+
+ ["time","B1","That's a good question.","neutral","Give yourself a moment to think before answering.",["That's a good question. Let me think about it.","That's a good question, actually."],"good question",["good ask","well question"],"Your inquiry is interesting. I will consider it.","That's a good ask. Let me think about it."],
+ ["time","B1","Let me think about that for a second.","neutral","Pause politely before answering.",["Hmm, let me think about that for a second.","Let me think about that for a second and get back to you."],"think about",["think to","think at"],"Please wait while I consider the matter.","Hmm, let me think to that for a second."],
+ ["time","B2","How can I put this?","neutral","Search for words, often before saying something delicate.",["How can I put this? The design needs more work.","How can I put this politely? It's not ready."],"put this",["tell this","place this"],"I am searching for appropriate words. The design is insufficient.","How can I tell this? The design needs more work."],
+ ["time","B2","What I mean is, …","neutral","Clarify or rephrase what you just said.",["What I mean is, we need more time, not more people.","What I mean is, the idea is good but the timing isn't."],"What I mean is",["What I mean it is","That I mean is"],"To clarify my previous statement, we require additional time.","What I mean it is, we need more time, not more people."],
+ ["time","C1","Off the top of my head, …","casual","Give information without checking it first.",["Off the top of my head, I'd say about forty clients.","Off the top of my head, I can't remember the exact date."],"Off the top of my head",["From the top of my head","On the top of my head"],"Without consulting the data, there are approximately forty clients.","From the top of my head, I'd say about forty clients."],
+
+ ["agree","B2","I couldn't agree more.","neutral","Agree completely.",["I couldn't agree more. We should have started earlier.","I couldn't agree more with Sarah on this."],"couldn't agree more",["could agree more","couldn't agree most"],"I agree with you completely and absolutely.","I could agree more. We should have started earlier."],
+ ["agree","B1","I see your point, but …","neutral","Show you understand before disagreeing.",["I see your point, but the budget is fixed.","I see your point, but I think we need more data."],"see your point",["look your point","see your opinion"],"I comprehend your argument; however, the budget is fixed.","I see your point, but the budget is fix."],
+ ["agree","B2","I'm with you on that.","casual","Say you agree with someone's view.",["I'm with you on that. The old process was too slow.","I'm with you on that one."],"with you on that",["with you in that","for you on that"],"I share your opinion regarding that matter.","I'm agree with you on that. The old process was too slow."],
+ ["agree","C1","up to a point","neutral","Agree only partly.",["I agree up to a point, but the costs worry me.","That's true up to a point."],"up to a point",["until a point","up to the point"],"I partially agree; however, I am concerned about costs.","I agree until a point, but the costs worry me."],
+ ["agree","B2","That's not how I see it.","neutral","Disagree directly but politely.",["That's not how I see it, actually.","Honestly, that's not how I see it."],"how I see it",["what I see it","how I look it"],"I disagree with your view.","That's not what I see it, actually."],
+
+ ["link","C1","That said, …","neutral","Introduce a contrast to what you just said.",["The plan is ambitious. That said, I think we can do it.","It's not perfect. That said, it's a big improvement."],"That said",["That saying","This said that"],"The plan is ambitious. Nevertheless, notwithstanding this, I think we can do it.","The plan is ambitious. That saying, I think we can do it."],
+ ["link","C1","Having said that, …","neutral","Add a point that balances what you just said.",["It's expensive. Having said that, it'll save us money in the long run.","He's new. Having said that, he's learning fast."],"Having said that",["Have said that","Having saying that"],"It is expensive. Notwithstanding this fact, it will save money.","It's expensive. Have said that, it'll save us money in the long run."],
+ ["link","B1","Anyway, …","casual","Go back to the main topic or end a side topic.",["Anyway, let's get back to the agenda.","Anyway, I'll let you get back to work."],"Anyway",["Any way that","In anyway"],"Returning to the previous topic, let us consider the agenda.","Any way that, let's get back to the agenda."],
+ ["link","B2","On top of that, …","neutral","Add another point, often another problem.",["We're short-staffed. On top of that, two people are on leave.","The tool is cheaper. On top of that, it's easier to use."],"On top of that",["On the top of that","At top of that"],"We are short-staffed. Furthermore, in addition, two people are on leave.","We're short-staffed. On the top of that, two people are on leave."],
+ ["link","B2","As I was saying, …","neutral","Go back to your point after an interruption.",["As I was saying, the launch is on track.","Sorry, as I was saying, we need two more weeks."],"As I was saying",["As I said it","As I was told"],"To resume my previous statement, the launch is on track.","As I said it, the launch is on track."],
+
+ ["emph","B2","The thing is, …","neutral","Introduce the real problem or the key point.",["The thing is, we don't have enough data yet.","The thing is, nobody asked the users."],"The thing is",["The thing it is","A thing is"],"The problem is the following: there is insufficient data.","The thing it is, we don't have enough data yet."],
+ ["emph","C1","What really matters is …","neutral","Focus attention on the most important point.",["What really matters is how the client feels.","What really matters is that we learn from it."],"What really matters is",["What really matters are","That really matters is"],"The most important factor is the client's emotional state.","What really matters are how the client feels."],
+ ["emph","C1","I do think …","neutral","Add strong emphasis, often after doubt.",["I do think we should wait.","I do think it's worth a try."],"do think",["am think","does think"],"I definitely and certainly think we should wait.","I am think we should wait."],
+ ["emph","C1","It's not that …, it's just that …","neutral","Explain your reason gently.",["It's not that I don't like it, it's just that it's too expensive.","It's not that we can't do it, it's just that we need more time."],"it's just that",["it's only that it","just it's that"],"I like it; however, the cost is excessive.","It's not that I don't like it, only is that it's too expensive."],
+ ["emph","C1","The last thing we want is …","neutral","Say strongly that something must be avoided.",["The last thing we want is to miss the launch.","The last thing we want is another delay."],"The last thing",["The latest thing","The final thing"],"Missing the launch would be highly undesirable.","The latest thing we want is to miss the launch."],
+
+ ["adv","C1","The more …, the more / fewer …","neutral","Show that two things change together.",["The more we test, the fewer bugs we ship.","The sooner we start, the better."],"the fewer",["fewer","the most few"],"If testing is increased, the quantity of bugs shipped will be reduced.","More we test, fewer bugs we ship."],
+ ["adv","C2","Not only did …, but … also …","formal","Emphasise two achievements or problems (inversion).",["Not only did we finish early, but we also came in under budget.","Not only did they miss the deadline, but they also lost the files."],"did we finish",["we finished","we did finish"],"We finished early and we came in under budget too.","Not only we finished early, but we also came in under budget."],
+ ["adv","C1","If anything, …","neutral","Suggest the opposite of what someone expects might be true.",["The new system isn't slower. If anything, it's faster.","It didn't hurt sales. If anything, it helped."],"If anything",["If something","If any"],"The new system is not slower. On the contrary, it is possibly faster.","The new system isn't slower. If something, it's faster."],
+ ["adv","C2","Had I known …, I would have …","formal","Talk about a past regret (inverted third conditional).",["Had I known about the delay, I would have told the client.","Had we known the cost, we would have chosen differently."],"Had I known",["If I knew","Have I known"],"If I had had knowledge of the delay, I would have informed the client.","If I would have known about the delay, I would have told the client."],
+ ["adv","B2","There's no point (in) + -ing","neutral","Say an action is useless.",["There's no point in arguing about it now.","There's no point in waiting any longer."],"point in arguing",["point to argue","point for arguing"],"Arguing about it now has no utility.","There's no point to argue about it now."],
+ ["adv","C1","It's about time + past simple","neutral","Say something should have happened already.",["It's about time we updated the website.","It's about time someone told him."],"updated",["update","will update"],"The updating of the website is long overdue.","It's about time we update the website."],
+
+ ["offer","B1","Do you want me to …?","casual","Offer to do something.",["Do you want me to send the agenda?","Do you want me to call them?"],"want me to",["want that I","want me"],"Shall I perform the sending of the agenda?","Do you want that I send the agenda?"],
+ ["offer","B1","Let me know if …","neutral","Invite someone to ask or tell you something.",["Let me know if you need anything else.","Let me know if Friday works for you."],"Let me know",["Let me to know","Make me know"],"Inform me should you require anything further.","Let me to know if you need anything else."],
+ ["offer","C1","I'll leave it with you.","neutral","Hand responsibility to someone else.",["I'll leave it with you, then. Shout if you get stuck.","OK, I'll leave it with you."],"leave it with you",["let it with you","leave you it"],"The responsibility is now yours.","I'll let it with you, then. Shout if you get stuck."],
+ ["offer","B1","Happy to help.","casual","Reply warmly when someone thanks you or asks for help.",["Happy to help. Just send me the file.","Happy to help any time."],"Happy to help",["Happy for help","Happy helping you to"],"It would be my pleasure to provide assistance.","Happy for help. Just send me the file."],
+ ["offer","B2","Feel free to …","neutral","Tell someone they're welcome to do something.",["Feel free to call me if anything's unclear.","Feel free to add your comments to the doc."],"Feel free to",["Feel free for","Be free to"],"You are permitted to call me if anything is unclear.","Feel free for calling me if anything's unclear."],
+
+ ["vague","B2","… or so","casual","Mean \"approximately\".",["It'll take a week or so.","We've got twenty or so people coming."],"or so",["or such","and so"],"It will take approximately seven days.","It'll take a week and so."],
+ ["vague","B2","… and that kind of thing","casual","End a list without naming everything.",["We'll need laptops, chargers and that kind of thing.","Budgets, timelines and that kind of thing."],"that kind of thing",["this kind of things","that kinds of thing"],"We will need laptops, chargers and similar items.","We'll need laptops, chargers and this kind of things."],
+ ["vague","B2","-ish","casual","Mean \"roughly\" with times, ages or colours.",["Let's meet at three-ish.","He's fortyish, I think."],"three-ish",["three-like","three-y"],"Let us meet at approximately three o'clock.","Let's meet at three more or less o'clock."],
+ ["vague","B1","a couple of","casual","Mean two, or a small number.",["I've got a couple of questions.","Give me a couple of minutes."],"a couple of",["a double of","couple of the"],"I possess a small number of questions.","I've got a double of questions."],
+ ["vague","B2","more or less","neutral","Mean \"almost\" or \"approximately\".",["The report is more or less finished.","We're more or less on schedule."],"more or less",["more and less","most or less"],"The report is nearly at a state of completion.","The report is more and less finished."]
+];
+
+const NAT = NAT_RAW.map((r, i) => ({id:"n" + i, cat:r[0], lv:r[1], pat:r[2], reg:r[3], use:r[4], exs:r[5], a:r[6], d:r[7], stiff:r[8], err:r[9]}));
+const natState = {cat:"all", lv:"all", tab:"learn", quiz:null, tr:null};
+function NS(id){ const x = S.nat[id]; if(x && typeof x === "object") return x; return (S.nat[id] = {r:0, w:0, box:0, due:0}); }
+const natFiltered = () => NAT.filter(p => (natState.cat === "all" || p.cat === natState.cat) && (natState.lv === "all" || p.lv === natState.lv));
+const natDue = () => NAT.filter(p => { const s = S.nat[p.id]; return s && s.box > 0 && s.due <= Date.now(); });
+const natMastered = p => { const s = S.nat[p.id]; return !!(s && s.box >= 3); };
+const catName = id => (NCATS.find(c => c[0] === id) || ["", id])[1];
+function natMark(p, ok){
+  const s = NS(p.id);
+  if(ok){ s.r = (+s.r || 0) + 1; s.box = Math.min(6, (+s.box || 0) + 1); }
+  else { s.w = (+s.w || 0) + 1; s.box = 1; }
+  s.due = Date.now() + INTERVALS[s.box] * DAY;
+  persist();
+}
+const natDots = p => { const b = Math.min(3, (S.nat[p.id] || {}).box || 0); return `<span class="m-dots" title="${b >= 3 ? "Mastered" : b ? "Learning" : "New"}">${[0, 1, 2].map(i => `<i class="${i < b ? "on" : ""}"></i>`).join("")}</span>`; };
+const natEx = p => exHTML({ex:p.exs[0], a:p.a});
+document.addEventListener("click", e => { if(e.target.closest && e.target.closest("[data-nat-quiz]")){ natState.tab = "quiz"; natState.quiz = null; } });
+
+function renderNatural(){
+  setNav("natural");
+  const items = natFiltered();
+  const due = natDue().length;
+  app.innerHTML = `
+  <header class="page-head"><p class="eyebrow">Sound like a native speaker</p><h1>Natural English</h1>
+  <p class="lede">The small phrases and structures native speakers use all the time: to react, soften, buy time, link ideas and add emphasis. Learn when to use them, hear them, then say them yourself.</p></header>
+  <section class="panel">
+    <div class="fchips" role="radiogroup" aria-label="Category">${[["all", "All"], ...NCATS].map(([k, l]) => `<button class="fchip${natState.cat === k ? " on" : ""}" role="radio" aria-checked="${natState.cat === k}" data-ncat="${k}">${esc(l)}</button>`).join("")}</div>
+    <div class="row" style="margin-top:12px">
+      <span class="seg-ctl" role="radiogroup" aria-label="Level">${["all", "B1", "B2", "C1", "C2"].map(l => `<button role="radio" aria-checked="${natState.lv === l}" data-nlv="${l}">${l === "all" ? "All levels" : l}</button>`).join("")}</span>
+      <span class="spacer"></span>
+      <span class="muted" style="font-size:14px">${NAT.filter(natMastered).length} / ${NAT.length} mastered</span>
+      ${due ? `<span class="pill due">${due} due</span>` : ""}
+    </div>
+  </section>
+  <div class="tabs" role="tablist">${[["learn", "Learn"], ["quiz", "Practise"], ["say", "Say it naturally"]].map(([k, l], i) => `<button role="tab" aria-selected="${natState.tab === k}" data-ntab="${k}"><span>${i + 1}</span>${l}</button>`).join("")}</div>
+  <div id="npane" class="stack"></div>`;
+  app.querySelectorAll("[data-ncat]").forEach(b => b.onclick = () => { natState.cat = b.dataset.ncat; natState.quiz = null; natState.tr = null; renderNatural(); });
+  app.querySelectorAll("[data-nlv]").forEach(b => b.onclick = () => { natState.lv = b.dataset.nlv; natState.quiz = null; natState.tr = null; renderNatural(); });
+  app.querySelectorAll("[data-ntab]").forEach(b => b.onclick = () => { natState.tab = b.dataset.ntab; renderNatural(); });
+  const pane = $("#npane");
+  if(!items.length){ pane.innerHTML = '<div class="panel">No patterns match these filters. Try another level.</div>'; return; }
+  if(natState.tab === "learn") natLearn(items, pane);
+  else if(natState.tab === "quiz") natQuiz(items, pane);
+  else natSay(items, pane);
+  wireSpeak(app);
+}
+function natCard(p){
+  return `<li class="phr">
+    <div class="phr-top"><b class="phr-ph">${esc(p.pat)}</b><span class="pill k-p">${p.lv}</span><span class="pill reg-${p.reg}">${p.reg}</span>${natDots(p)}</div>
+    <p class="phr-m">${esc(p.use)}</p>
+    <p class="frame-inline phr-ex">${natEx(p)}</p>
+    ${listenHTML(p.exs[0])}
+    ${p.exs[1] ? `<p class="frame-inline phr-ex2"><button class="icon-btn speak" data-say="${esc(p.exs[1])}" aria-label="Listen to the second example">▶</button> ${esc(p.exs[1])}</p>` : ""}
+  </li>`;
+}
+function natLearn(items, pane){
+  const groups = natState.cat === "all" ? NCATS.filter(c => items.some(p => p.cat === c[0])) : [[natState.cat, catName(natState.cat)]];
+  pane.innerHTML = groups.map(([id, name]) => `<section><h2 class="h3">${esc(name)}</h2><ul class="phr-list">${items.filter(p => p.cat === id).map(natCard).join("")}</ul></section>`).join("") +
+    `<div class="next-row"><button class="btn primary" id="n-go-quiz">Practise these →</button></div>`;
+  $("#n-go-quiz", pane).onclick = () => { natState.tab = "quiz"; natState.quiz = null; renderNatural(); window.scrollTo({top:0, behavior:"smooth"}); };
+}
+function buildNatQuiz(items){
+  const now = Date.now(), st = p => S.nat[p.id] || {box:0, due:0};
+  const pick = [...shuffle(items.filter(p => st(p).box > 0 && st(p).due <= now)), ...shuffle(items.filter(p => !st(p).box)), ...items.filter(p => st(p).box > 0 && st(p).due > now).sort((a, b) => st(a).box - st(b).box)].slice(0, 10);
+  return shuffle(pick).map(p => Math.random() < 0.5
+    ? {p, type:"natural", right:p.exs[0], opts:shuffle([p.exs[0], p.stiff, p.err])}
+    : {p, type:"gap", right:p.a, opts:shuffle([p.a, ...p.d])});
+}
+function natQuiz(items, pane){
+  let q = natState.quiz;
+  const key = natState.cat + "|" + natState.lv;
+  if(!q || q.key !== key) q = natState.quiz = {key, qs:buildNatQuiz(items), i:0, score:0, answered:false, missed:[]};
+  if(q.i >= q.qs.length){
+    pane.innerHTML = `<section class="panel"><p class="qtype">Round complete</p><p class="done-score">${q.score} / ${q.qs.length}</p>
+      ${q.missed.length ? `<h3 class="h4">Review these</h3><ul class="phr-miss">${q.missed.map(p => `<li><b>${esc(p.pat)}</b> <span class="muted">· ${esc(p.use)}</span><br><span class="frame-inline">${esc(p.exs[0])}</span></li>`).join("")}</ul>` : '<p class="muted">Every answer right. These patterns will come back for review later.</p>'}
+      <div class="row" style="margin-top:16px"><button class="btn" id="nq-again">Another round</button><button class="btn primary" id="nq-say">Say ${q.missed.length ? "the ones you missed" : "them"} naturally →</button></div></section>`;
+    $("#nq-again", pane).onclick = () => { natState.quiz = null; renderNatural(); };
+    $("#nq-say", pane).onclick = () => { const list = (q.missed.length ? q.missed : q.qs.map(x => x.p)); natState.tr = {queue:list.map(p => p.id), i:0}; natState.tab = "say"; renderNatural(); };
+    return;
+  }
+  const cur = q.qs[q.i], p = cur.p;
+  pane.innerHTML = `<section class="panel">
+    <div class="dots" aria-hidden="true">${q.qs.map((_, k) => `<span class="dot ${k < q.i ? "done" : ""} ${k === q.i ? "cur" : ""}"></span>`).join("")}<span class="muted">Question ${q.i + 1} of ${q.qs.length}</span></div>
+    ${cur.type === "natural"
+      ? `<p class="qtype">Which sounds most natural?</p><p class="qtext" style="font-size:17px">${esc(p.use)}</p>`
+      : `<p class="qtype">Complete the phrase · ${esc(p.pat)}</p><p class="qtext frame-inline">${esc(p.exs[0].replace(blankRe(p.a), "$1§§")).replace("§§", '<span class="blank">_____</span>')}</p>`}
+    <div class="opts">${cur.opts.map(o => `<button class="opt${cur.type === "natural" ? " serif" : ""}" data-o="${esc(o)}">${esc(o)}</button>`).join("")}</div>
+    <div id="nqfb" class="qfb" aria-live="polite"></div>
+    <div class="next-row" style="margin-top:18px"><button class="btn primary" id="nq-next" disabled>${q.i + 1 === q.qs.length ? "See result" : "Next question"} →</button></div>
+  </section>`;
+  const fb = $("#nqfb", pane), nx = $("#nq-next", pane);
+  pane.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+    if(q.answered) return;
+    q.answered = true;
+    const ok = b.dataset.o === cur.right;
+    pane.querySelectorAll(".opt").forEach(x => { x.disabled = true; if(x.dataset.o === cur.right) x.classList.add("right"); });
+    if(!ok){ b.classList.add("wrong"); q.missed.push(p); } else q.score++;
+    natMark(p, ok);
+    fb.className = "qfb " + (ok ? "ok" : "no");
+    fb.innerHTML = `<b>${ok ? "Correct." : "Not quite."}</b> <b>${esc(p.pat)}</b>: ${esc(p.use)}
+      ${cur.type === "natural" ? `<ul class="tips" style="margin-top:8px"><li><b>Natural:</b> ${esc(p.exs[0])}</li><li><b>Too formal:</b> <span class="muted">${esc(p.stiff)}</span></li><li><b>Common mistake:</b> <span class="muted">${esc(p.err)}</span></li></ul>` : ""}
+      <p class="frame-inline" style="margin:8px 0">${natEx(p)}</p>${listenHTML(p.exs[0])}`;
+    wireSpeak(fb);
+    nx.disabled = false; nx.focus();
+  });
+  nx.onclick = () => { q.i++; q.answered = false; renderNatural(); };
+}
+function sayPrompt(p, text){
+  return `A C1-level English learner was asked to say a stiff, textbook sentence the way a native speaker would at work, using the pattern "${p.pat}" (${p.use}).
+Textbook sentence: "${p.stiff}"
+Their answer (spoken with speech-to-text, so ignore punctuation and capital letters):
+"""${text}"""
+
+Judge whether they used the pattern correctly, how natural it sounds, and any grammar problems. Be encouraging and specific.
+Return ONLY JSON with exactly this shape:
+{"used":true|false,"natural":<1-5, where 5 sounds fully native>,"comment":"<max 25 words>","fixed":"<their answer corrected and made natural, keeping their words where possible>","model":"<one natural way a native speaker would say it, using the pattern>"}`;
+}
+function natSay(items, pane){
+  let T = natState.tr;
+  if(!T || !T.queue || !T.queue.length){
+    const st = p => S.nat[p.id] || {box:0};
+    const ordered = [...shuffle(items.filter(p => st(p).box > 0 && st(p).box < 3)), ...shuffle(items.filter(p => !st(p).box)), ...shuffle(items.filter(p => st(p).box >= 3))];
+    T = natState.tr = {queue:ordered.map(p => p.id), i:0};
+  }
+  if(T.i >= T.queue.length) T.i = 0;
+  const p = NAT.find(x => x.id === T.queue[T.i]);
+  pane.innerHTML = `<section class="panel">
+    <p class="qtype">Say it naturally · ${T.i + 1} of ${T.queue.length}</p>
+    <p class="muted" style="margin:0 0 4px;font-size:14px">Textbook version</p>
+    <p class="stiff">${esc(p.stiff)}</p>
+    <p style="margin:14px 0 4px">Say it the way a native speaker would, using <b>${esc(p.pat)}</b></p>
+    <p class="muted" style="margin:0 0 12px;font-size:14px">${esc(p.use)}</p>
+    <label for="nat-in" class="lbl">Your version</label>
+    <textarea id="nat-in" rows="3" placeholder="Tap Speak and say it, or type.">${esc(T.text || "")}</textarea>
+    <div class="row">
+      <button class="btn" id="nat-show" type="button">Show a natural version</button>
+      <span class="spacer"></span>
+      <button class="btn mic-btn" id="nat-mic" type="button">${MIC_SVG}<span>Speak</span></button>
+      <button class="btn primary ai-only" id="nat-check" type="button">Check</button>
+    </div>
+    <p class="muted no-ai-note" style="margin:10px 0 0">Add your Claude API key in <a href="#settings">Settings</a> to get your version checked. Without it, compare with the natural version.</p>
+  </section>
+  <div id="nat-out"></div>
+  <div class="next-row"><button class="btn" id="nat-next">Next sentence →</button></div>`;
+  const ta = $("#nat-in", pane), out = $("#nat-out", pane), mic = $("#nat-mic", pane);
+  ta.addEventListener("input", () => { T.text = ta.value; });
+  $("#nat-next", pane).onclick = () => { T.i++; T.text = ""; renderNatural(); };
+  $("#nat-show", pane).onclick = () => {
+    out.innerHTML = `<section class="panel"><h2 class="h3">Natural versions</h2>${p.exs.map(x => `<p class="frame-inline sayback">${pronHTML(x)}</p>${listenHTML(x)}`).join('<div style="height:12px"></div>')}</section>`;
+    wireSpeak(out);
+  };
+  if(!SR) mic.remove();
+  else mic.onclick = () => {
+    if(Mic.active && Mic.owner === mic){ micStop(false); return; }
+    try{ speechSynthesis.cancel(); }catch(e){}
+    micStart({owner:mic, base:"", autoSendMs:0,
+      onUpdate:() => { ta.value = (Mic.text + " " + Mic.interim).trim(); T.text = ta.value; mic.classList.toggle("listening", Mic.active); mic.lastChild.textContent = Mic.active ? "Stop" : "Speak"; },
+      onDone:(t, s, conf, err) => { ta.value = t; T.text = t; mic.classList.remove("listening"); mic.lastChild.textContent = "Speak"; if(err) out.innerHTML = `<div class="panel err">${esc(micErrText(err))}</div>`; }});
+  };
+  $("#nat-check", pane).onclick = async () => {
+    const text = ta.value.trim();
+    if(wordsOf(text).length < 3){ out.innerHTML = '<div class="panel err">Say or type your version first.</div>'; return; }
+    if(Mic.active) micStop(false);
+    const btn = $("#nat-check", pane); btn.disabled = true;
+    out.innerHTML = '<section class="panel"><p class="muted" style="margin:0">Checking…</p></section>';
+    try{
+      const v = await askJSON(sayPrompt(p, text));
+      const score = Math.max(1, Math.min(5, Math.round(+v.natural || 0)));
+      natMark(p, !!v.used && score >= 4);
+      out.innerHTML = `<section class="panel">
+        <div class="fb-head"><h2 class="h3">${v.used ? (score >= 4 ? "Natural. Well done." : "Good try") : "The pattern is missing"}</h2><span class="score">Naturalness ${score}/5</span></div>
+        ${v.comment ? `<p style="margin:0 0 12px">${esc(v.comment)}</p>` : ""}
+        ${v.fixed ? `<h3 class="h4">Your version, polished</h3><p class="frame-inline sayback">${pronHTML(String(v.fixed).replace(/[\[\]]/g, ""))}</p>${listenHTML(String(v.fixed))}` : ""}
+        ${v.model ? `<h3 class="h4">How a native speaker might say it</h3><p class="frame-inline sayback">${pronHTML(String(v.model).replace(/[\[\]]/g, ""))}</p>${listenHTML(String(v.model))}` : ""}
+      </section>`;
+      wireSpeak(out);
+    }catch(e){ out.innerHTML = `<div class="panel err">${esc(aiError(e).replace("Your partner didn't answer", "The coach couldn't check this"))}</div>`; }
+    finally{ btn.disabled = false; }
+  };
+}
+
 /* ---------------- AI partner ---------------- */
 const SCEN = [
  {id:"release", name:"Weekly releases debate", who:"Sarah", role:"your engineering manager", desc:"Sarah wants to move the team from monthly to weekly releases next month. She is open to arguments but needs convincing either way.", goal:"Give a well-supported opinion and push back diplomatically.", cards:["A","B","F"], open:"So, I'm thinking we move to weekly releases starting next month. What's your take?"},
@@ -2237,6 +2506,7 @@ function route(){
   if(h === "partner") return renderPartner();
   if(h === "settings") return renderSettings();
   if(h === "phrases") return renderPhrases();
+  if(h === "natural") return renderNatural();
   renderLibrary();
 }
 window.addEventListener("hashchange", () => { try{ speechSynthesis.cancel(); }catch(e){} if(Mic.active) micStop(false); route(); window.scrollTo(0, 0); });
