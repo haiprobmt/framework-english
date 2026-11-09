@@ -204,6 +204,36 @@ p.err{color:var(--bad)}
   .composer{bottom:8px}
   .msg{max-width:100%}
 }
+/* phrases */
+.lv-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.lv-chip{display:flex;flex-direction:column;align-items:flex-start;gap:5px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;font:inherit;text-align:left}
+.lv-chip:hover{border-color:var(--accent)}
+.lv-chip.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:color-mix(in srgb,var(--accent) 6%,var(--surface))}
+.lv-big{font:800 24px/1 var(--display)}
+.lv-sub{font-size:12.5px;color:var(--muted);line-height:1.3}
+.lv-bar{display:block;width:100%;height:5px;border-radius:3px;background:var(--line);overflow:hidden}
+.lv-bar span{display:block;height:100%;background:var(--good)}
+.phr-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.phr{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.phr-top{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.phr-ph{font:700 18px/1.2 var(--display)}
+.phr-m{margin:0;color:var(--muted);font-size:14.5px}
+.phr-ex{margin:0;font-size:17px;line-height:1.5}
+.pr-on .phr-ex{line-height:1.35}
+mark.hl{background:color-mix(in srgb,var(--accent) 15%,transparent);color:inherit;border-radius:4px;padding:0 2px}
+.pill.k-c{background:color-mix(in srgb,var(--s1) 16%,transparent);color:var(--s1)}
+.pill.k-p{background:color-mix(in srgb,var(--s3) 16%,transparent);color:var(--s3)}
+.m-dots{display:inline-flex;gap:3px;margin-left:auto}
+.m-dots i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.m-dots i.on{background:var(--good)}
+.phr-miss{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px}
+.use-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.use-list li{padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--accent) 6%,var(--surface));border:1px solid var(--line)}
+.stack{display:flex;flex-direction:column;gap:20px}
+.promo{display:flex;gap:16px;align-items:center;flex-wrap:wrap;text-decoration:none;color:var(--ink)}
+.promo:hover{border-color:var(--accent)}
+.promo .h3{margin:0 0 4px}
+@media (max-width: 720px){ .lv-row{grid-template-columns:1fr 1fr} .phr-list{grid-template-columns:1fr} }
 #voice-btn{margin-left:0}
 #voice-btn-name{max-width:14ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .voice-panel{flex-basis:100%;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;max-width:620px;margin-left:auto}
@@ -402,6 +432,7 @@ q{font-family:var(--frame);font-style:italic}
   <nav aria-label="Main">
     <a href="#library" data-nav="library">Library</a>
     <a href="#partner" data-nav="partner">AI partner</a>
+    <a href="#phrases" data-nav="phrases">Phrases</a>
     <a href="#review" data-nav="review">Review <span class="badge" id="due-badge"></span></a>
     <a href="#radar" data-nav="radar">Repetition radar</a>
     <a href="#settings" data-nav="settings">Settings</a>
@@ -642,7 +673,8 @@ function normalize(x){
   return {v:1, updatedAt:+x.updatedAt || 0,
     progress:(x.progress && typeof x.progress === "object") ? x.progress : {},
     attempts:Array.isArray(x.attempts) ? x.attempts.filter(a => a && typeof a.text === "string" && typeof a.card === "string").slice(-80) : [],
-    partner:Array.isArray(x.partner) ? x.partner.filter(s => s && typeof s === "object").slice(-20) : []};
+    partner:Array.isArray(x.partner) ? x.partner.filter(s => s && typeof s === "object").slice(-20) : [],
+    phr:(x.phr && typeof x.phr === "object" && !Array.isArray(x.phr)) ? x.phr : {}};
 }
 function lsGet(k){ try{ const r = localStorage.getItem(k); return r ? JSON.parse(r) : null; }catch(e){ return null; } }
 function lsSet(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
@@ -895,6 +927,7 @@ function renderLibrary(){
     <a class="stat" href="#radar"><span class="k">Most repeated word</span><span class="v">${top ? esc(label(top.w)) : "None yet"}</span></a>
     <a class="btn primary" href="${cardHref(next)}">${due.length ? "Review" : (practised ? "Continue" : "Start")} with Card ${next.id} →</a>
   </section>
+  <a class="panel promo" href="#phrases"><div style="flex:1;min-width:220px"><h2 class="h3">Collocations & phrasal verbs</h2><p class="muted" style="margin:0">${PHR.length} work phrases from B1 to C2 · ${PHR.filter(isMastered).length} mastered${phrDue().length ? ` · <b style="color:var(--warn)">${phrDue().length} due</b>` : ""}</p></div><span class="btn">Practise phrases →</span></a>
   <section class="library">
     ${GROUPS.map(g => `<div class="group"><h2>${g.name}</h2><p class="muted">${g.desc}</p><ul class="tiles">${CARDS.filter(c => c.g === g.name).map(tile).join("")}</ul></div>`).join("")}
   </section>`;
@@ -1203,6 +1236,7 @@ function renderReview(){
   app.innerHTML = `
   <header class="page-head"><p class="eyebrow">Spaced review</p><h1>${due.length ? due.length + " card" + (due.length > 1 ? "s" : "") + " due today" : "Nothing due today"}</h1>
   <p class="lede">Cards come back just before you would forget them: after 1, 3, 7, 14, 30 and 60 days. Rate a card after you practise it to schedule it.</p></header>
+  ${phrDue().length ? `<a class="panel promo" href="#phrases"><div style="flex:1"><h2 class="h3">${phrDue().length} phrase${phrDue().length > 1 ? "s" : ""} due</h2><p class="muted" style="margin:0">Collocations and phrasal verbs you're learning.</p></div><span class="btn primary" data-phr-quiz>Practise phrases</span></a>` : ""}
   ${due.length ? `<section><h2 class="h3">Due now</h2><ul class="rlist">${due.map(c => row(c, `<a class="btn primary" href="${cardHref(c)}" data-pr="${c.id}">Practise</a>`)).join("")}</ul></section>` : ""}
   <section><h2 class="h3">Coming up</h2>${sched.length ? `<ul class="rlist">${sched.map(c => row(c, `<a class="btn" href="${cardHref(c)}">Open</a>`)).join("")}</ul>` : '<div class="panel empty"><p style="margin:0">No cards scheduled yet. Practise a card and rate it Hard, Good or Easy to add it here.</p></div>'}</section>
   ${fresh.length ? `<section><h2 class="h3">Not scheduled yet <span class="muted" style="font:500 15px var(--body)">· ${fresh.length}</span></h2><ul class="rlist">${fresh.map(c => row(c, `<a class="btn" href="${cardHref(c)}">Open</a>`)).join("")}</ul></section>` : ""}`;
@@ -1596,6 +1630,311 @@ function renderSettings(){
   const inst = $("#set-install"); if(inst) inst.onclick = () => { const ib = $("#install-btn"); if(ib) ib.click(); };
 }
 
+/* ---------------- collocations & phrasal verbs (B1–C2) ---------------- */
+/* [level, kind (c = collocation, p = phrasal verb), phrase, meaning, example, word(s) to blank, wrong options] */
+const PHR_RAW = [
+ ["B1","c","make a decision","choose what to do after thinking","We need to make a decision by Friday.","make",["do","get"]],
+ ["B1","c","do research","study a subject to find information","Did you do any research before the meeting?","do",["make","take"]],
+ ["B1","c","take a break","stop working for a short time","Let's take a short break and come back at three.","take",["make","do"]],
+ ["B1","c","pay attention","watch, listen or think carefully","Please pay attention to the deadlines on slide four.","pay",["make","put"]],
+ ["B1","c","make progress","move forward and improve","We've made good progress on the new website.","made",["done","got"]],
+ ["B1","c","meet a deadline","finish something by the agreed time","We worked late to meet the deadline.","meet",["catch","win"]],
+ ["B1","c","give a presentation","present information to a group","She gave a great presentation yesterday.","gave",["did","held"]],
+ ["B1","c","ask a question","say something to get information","Can I ask a quick question?","ask",["make","do"]],
+ ["B1","c","save time","use less time than usual","This tool will save us a lot of time.","save",["win","earn"]],
+ ["B1","c","waste time","use time badly","Let's not waste time on small details.","waste",["miss","throw"]],
+ ["B1","c","take notes","write down important points","Could you take notes during the call?","take",["do","get"]],
+ ["B1","c","solve a problem","find the answer to a difficulty","We solved the problem by restarting the server.","solved",["answered","made"]],
+ ["B1","c","make a mistake","do something wrong by accident","I made a mistake in the invoice.","made",["did","took"]],
+ ["B1","c","have a meeting","meet to discuss something","We have a meeting with the client at ten.","have",["make","do"]],
+ ["B1","p","set up","arrange or organise","Could you set up a meeting with the design team?","set up",["set off","set out"]],
+ ["B1","p","find out","discover information","I'll find out who is responsible.","find out",["find up","find in"]],
+ ["B1","p","call back","phone someone again","Can I call you back in five minutes?","back",["off","out"]],
+ ["B1","p","fill in","complete a form","Please fill in this form before Friday.","fill in",["fill up","fill on"]],
+ ["B1","p","look forward to","feel happy about something coming","I look forward to hearing from you.","forward to",["ahead to","up to"]],
+ ["B1","p","turn down","refuse an offer or request","They turned down our offer.","turned down",["turned off","turned up"]],
+ ["B1","p","go over","check or review carefully","Let's go over the plan one more time.","go over",["go off","go out"]],
+ ["B1","p","put off","delay to a later time","We had to put off the launch until May.","put off",["put on","put up"]],
+ ["B1","p","carry on","continue doing something","Sorry for interrupting. Please carry on.","carry on",["carry out","carry off"]],
+ ["B1","p","check in with","contact someone to see how things are","I'll check in with you tomorrow about the report.","check in",["check out","check up"]],
+ ["B1","p","sort out","solve or organise a problem","Don't worry, IT will sort out the problem.","sort out",["sort in","sort off"]],
+ ["B1","p","get back to","reply to someone later","I'll get back to you by the end of the day.","get back to",["get over to","get away to"]],
+ ["B1","p","pick up","continue from where someone stopped","Can you pick up where Anna left off?","pick up",["pick out","pick off"]],
+ ["B1","p","log in","enter a system with your details","You need to log in with your company email.","log in",["log up","log at"]],
+
+ ["B2","c","raise a concern","mention a worry or problem","She raised a concern about the budget.","raised",["rose","lifted"]],
+ ["B2","c","reach an agreement","finally agree after discussion","After two hours, we finally reached an agreement.","reached",["arrived","won"]],
+ ["B2","c","take responsibility","accept that something is your duty or fault","The team leader took full responsibility for the delay.","took",["made","did"]],
+ ["B2","c","draw a conclusion","decide what is true from evidence","It's too early to draw any conclusions.","draw",["pull","take"]],
+ ["B2","c","set a target","decide a goal to achieve","We've set an ambitious target for next quarter.","set",["put","made"]],
+ ["B2","c","make an effort","try hard","Everyone made a real effort to finish on time.","made",["did","gave"]],
+ ["B2","c","place an order","ask a company to supply something","The client placed an order for 500 units.","placed",["put","did"]],
+ ["B2","c","strong evidence","facts that clearly prove something","There's strong evidence that the new process works.","strong",["big","heavy"]],
+ ["B2","c","heavy workload","a lot of work to do","I've got a heavy workload this week.","heavy",["strong","fat"]],
+ ["B2","c","run a business","manage a company","She has run her own business for ten years.","run",["driven","made"]],
+ ["B2","c","meet expectations","be as good as people hoped","The results didn't meet our expectations.","meet",["reach","fill"]],
+ ["B2","c","take into account","consider when deciding","We need to take the costs into account.","take",["put","bring"]],
+ ["B2","c","gain experience","get skills by doing something","I gained a lot of experience in my last role.","gained",["won","took"]],
+ ["B2","c","high priority","something very important to do first","Security is a high priority for us.","high",["tall","strong"]],
+ ["B2","p","come up with","think of an idea or plan","We need to come up with a better solution.","up with",["down with","in with"]],
+ ["B2","p","point out","tell someone a fact they may not know","She pointed out a mistake in the report.","pointed out",["pointed up","pointed over"]],
+ ["B2","p","back up","support a claim with evidence","Can you back up your claim with data?","back up",["back off","back down"]],
+ ["B2","p","bring up","start talking about a subject","I'd like to bring up the issue of overtime.","bring up",["bring out","bring off"]],
+ ["B2","p","figure out","understand or solve after thinking","We still haven't figured out what caused the bug.","figured out",["figured up","figured in"]],
+ ["B2","p","follow up on","take further action on something","I'll follow up on this after the meeting.","follow up on",["follow out on","follow in on"]],
+ ["B2","p","run into","unexpectedly meet a problem","We ran into some problems during testing.","ran into",["ran over","ran onto"]],
+ ["B2","p","take on","accept work or responsibility","I can't take on any more projects this month.","take on",["take in","take off"]],
+ ["B2","p","work out","calculate or find a solution","Let's work out how much it will cost.","work out",["work up","work off"]],
+ ["B2","p","lay out","explain or present clearly","The proposal lays out three options.","lays out",["lays off","lays down"]],
+ ["B2","p","phase out","gradually stop using something","The old system will be phased out next year.","phased out",["phased off","phased down"]],
+ ["B2","p","scale back","make something smaller","We had to scale back our plans because of the budget.","scale back",["scale off","scale in"]],
+ ["B2","p","step in","get involved to help in a difficult situation","When the manager was ill, Tom stepped in to lead the meeting.","stepped in",["stepped on","stepped off"]],
+ ["B2","p","weigh up","compare advantages and disadvantages","We need to weigh up the pros and cons.","weigh up",["weigh in","weigh out"]],
+
+ ["C1","c","bridge the gap","connect two different things","This training aims to bridge the gap between theory and practice.","bridge",["build","cross"]],
+ ["C1","c","a steep learning curve","something new that is hard to learn quickly","There's a steep learning curve with the new software.","steep",["high","tall"]],
+ ["C1","c","strike a balance","find a fair middle point","We need to strike a balance between speed and quality.","strike",["hit","make"]],
+ ["C1","c","tackle an issue","deal with a difficult problem","The new policy tackles the issue of remote work.","tackles",["fights","beats"]],
+ ["C1","c","a viable option","a choice that can work in practice","Outsourcing is no longer a viable option.","viable",["living","lively"]],
+ ["C1","c","a vested interest","a personal reason to want a certain result","The supplier has a vested interest in delaying the project.","vested",["dressed","fixed"]],
+ ["C1","c","conduct a survey","carry out a study by asking questions","We conducted a survey of 500 customers.","conducted",["drove","led"]],
+ ["C1","c","allocate resources","decide how to share money, time or people","We need to allocate more resources to testing.","allocate",["locate","divide"]],
+ ["C1","c","a sharp decline","a sudden, large fall","Sales saw a sharp decline in the second quarter.","sharp",["sour","pointed"]],
+ ["C1","c","come to terms with","slowly accept something difficult","The team is still coming to terms with the changes.","terms",["conditions","words"]],
+ ["C1","c","pose a risk","create a possible danger","Outdated software poses a serious risk to the company.","poses",["places","puts"]],
+ ["C1","c","exert pressure","use influence to make someone act","Investors are exerting pressure on the board to cut costs.","exerting",["executing","expressing"]],
+ ["C1","c","a broad consensus","general agreement among most people","There's a broad consensus that we need to change.","broad",["thick","large"]],
+ ["C1","c","reap the benefits","get the good results of earlier work","We're now reaping the benefits of the new system.","reaping",["picking","winning"]],
+ ["C1","p","iron out","solve the remaining small problems","We still need to iron out a few details.","iron out",["iron off","iron up"]],
+ ["C1","p","drill down","look at data in more detail","Let's drill down into the regional figures.","drill down",["drill up","drill out"]],
+ ["C1","p","flesh out","add more detail to an idea","Can you flesh out the proposal before Friday?","flesh out",["flesh up","flesh in"]],
+ ["C1","p","gloss over","avoid dealing with something properly","The report glosses over the real risks.","glosses over",["glosses under","glosses through"]],
+ ["C1","p","bounce back","recover quickly after a problem","The market bounced back after a difficult year.","bounced back",["bounced off","bounced up"]],
+ ["C1","p","fall through","fail to happen","The deal fell through at the last minute.","fell through",["fell over","fell out"]],
+ ["C1","p","hold off","wait before doing something","Let's hold off on hiring until we know the budget.","hold off",["hold out","hold up"]],
+ ["C1","p","rule out","decide something is not possible","We can't rule out further delays.","rule out",["rule off","rule over"]],
+ ["C1","p","spell out","explain something very clearly","Could you spell out exactly what you need from us?","spell out",["spell off","spell up"]],
+ ["C1","p","play down","make something seem less important","The CEO played down the risks in his speech.","played down",["played off","played out"]],
+ ["C1","p","push back","resist or disagree with a plan","The client pushed back on our pricing.","pushed back",["pushed off","pushed over"]],
+ ["C1","p","roll out","launch something for many users","We'll roll out the new feature next month.","roll out",["roll off","roll over"]],
+ ["C1","p","wind down","gradually come to an end","The project is winding down, so we're reducing the team.","winding down",["winding off","winding in"]],
+ ["C1","p","buy into","believe in and support an idea","Not everyone has bought into the new strategy.","bought into",["bought onto","bought over"]],
+
+ ["C2","c","a foregone conclusion","a result that is certain before it happens","The outcome of the vote was a foregone conclusion.","foregone",["forgotten","forgiven"]],
+ ["C2","c","a cursory glance","a very quick look","A cursory glance at the data shows a clear trend.","cursory",["curious","cursive"]],
+ ["C2","c","to the letter","exactly, in every detail","We followed the instructions to the letter.","letter",["word","line"]],
+ ["C2","c","bear the brunt","suffer the worst part of something","Small suppliers will bear the brunt of the price increase.","brunt",["bulk","blunt"]],
+ ["C2","c","stem the tide","stop something bad from growing","The new measures failed to stem the tide of resignations.","stem",["stamp","steer"]],
+ ["C2","c","a moot point","a question that no longer matters","Whether we should have hired more is now a moot point.","moot",["mute","mood"]],
+ ["C2","c","inextricably linked","so connected they can't be separated","Quality and reputation are inextricably linked.","inextricably",["inexplicably","inevitably"]],
+ ["C2","c","glean insights","gradually collect useful understanding","We gleaned some useful insights from the interviews.","gleaned",["gleamed","cleaned"]],
+ ["C2","c","a tacit agreement","an agreement understood without words","There was a tacit agreement not to discuss salaries.","tacit",["tactful","tactic"]],
+ ["C2","c","wreak havoc","cause a lot of damage or disorder","The outage wreaked havoc on our delivery schedule.","wreaked",["wrecked","reeked"]],
+ ["C2","c","sweeping changes","changes that affect almost everything","The new CEO announced sweeping changes to the structure.","sweeping",["swiping","weeping"]],
+ ["C2","c","hold sway","have strong influence","Old habits still hold sway in the finance team.","sway",["swing","swagger"]],
+ ["C2","c","to a large extent","mostly, in many ways","To a large extent, the delay was unavoidable.","extent",["extend","extant"]],
+ ["C2","c","an uphill battle","a very difficult struggle","Getting approval will be an uphill battle.","uphill",["upward","upstream"]],
+ ["C2","p","paper over","hide a problem without solving it","The new process just papers over the cracks.","papers over",["papers under","papers out"]],
+ ["C2","p","stave off","prevent something bad for a while","The loan helped stave off bankruptcy.","stave off",["stave out","stave down"]],
+ ["C2","p","hammer out","reach an agreement after long discussion","Both sides spent the night hammering out a deal.","hammering out",["hammering down","hammering in"]],
+ ["C2","p","bow out","withdraw or retire from something","After twenty years, she decided to bow out gracefully.","bow out",["bow off","bow over"]],
+ ["C2","p","rein in","control or limit something","The board wants to rein in spending.","rein in",["rein up","rein out"]],
+ ["C2","p","edge out","beat someone by a small amount","We were edged out by a cheaper competitor.","edged out",["edged off","edged in"]],
+ ["C2","p","whittle down","gradually reduce in number","We've whittled the list down to three candidates.","down",["off","up"]],
+ ["C2","p","bank on","depend on something happening","Don't bank on getting the budget approved.","bank on",["bank in","bank at"]],
+ ["C2","p","churn out","produce large amounts quickly","The team churns out a new release every week.","churns out",["churns up","churns off"]],
+ ["C2","p","mull over","think carefully about something","Let me mull it over and get back to you.","over",["through","about"]],
+ ["C2","p","factor in","include something when calculating","Remember to factor in the cost of training.","factor in",["factor on","factor at"]],
+ ["C2","p","ride out","survive a difficult period","We have enough cash to ride out the downturn.","ride out",["ride off","ride over"]],
+ ["C2","p","home in on","focus closely on something","Let's home in on the main problem.","in on",["at on","up on"]],
+ ["C2","p","pan out","develop or turn out in a particular way","Let's see how the pilot pans out.","pans out",["pans off","pans up"]]
+];
+
+const PHR = PHR_RAW.map((r, i) => ({id:r[0] + r[1] + i, lv:r[0], k:r[1], ph:r[2], m:r[3], ex:r[4], a:r[5], d:r[6]}));
+const LEVELS = ["B1", "B2", "C1", "C2"];
+const LEVEL_NOTE = {B1:"Everyday work English", B2:"Confident professional", C1:"Precise and natural", C2:"Sophisticated and idiomatic"};
+const phrState = {lv:"B2", kind:"all", tab:"learn", quiz:null, use:null};
+function PS(id){ const x = S.phr[id]; if(x && typeof x === "object") return x; return (S.phr[id] = {r:0, w:0, box:0, due:0}); }
+const phrFiltered = () => PHR.filter(p => p.lv === phrState.lv && (phrState.kind === "all" || p.k === phrState.kind));
+const isMastered = p => { const s = S.phr[p.id]; return !!(s && s.box >= 3); };
+const phrDue = () => PHR.filter(p => { const s = S.phr[p.id]; return s && s.box > 0 && s.due <= Date.now(); });
+const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const blankRe = a => new RegExp("(^|[^A-Za-z])(" + reEsc(a).replace(/ /g, "\\s") + ")(?![A-Za-z])");
+function blankedHTML(p){ return esc(p.ex.replace(blankRe(p.a), "$1§§")).replace("§§", '<span class="blank">_____</span>'); }
+function exHTML(p){
+  const m = p.ex.match(blankRe(p.a));
+  if(!m) return pronHTML(p.ex);
+  const i = m.index + m[1].length;
+  return pronHTML(p.ex.slice(0, i)) + '<mark class="hl">' + pronHTML(m[2]) + "</mark>" + pronHTML(p.ex.slice(i + m[2].length));
+}
+const kindName = k => k === "c" ? "Collocation" : "Phrasal verb";
+const dots3 = p => { const b = Math.min(3, (S.phr[p.id] || {}).box || 0); return `<span class="m-dots" title="${b >= 3 ? "Mastered" : b ? "Learning" : "New"}">${[0, 1, 2].map(i => `<i class="${i < b ? "on" : ""}"></i>`).join("")}</span>`; };
+
+document.addEventListener("click", e => { if(e.target.closest && e.target.closest("[data-phr-quiz]")){ phrState.tab = "quiz"; phrState.quiz = null; } });
+function renderPhrases(){
+  setNav("phrases");
+  const items = phrFiltered();
+  const due = phrDue().length;
+  app.innerHTML = `
+  <header class="page-head"><p class="eyebrow">Vocabulary · B1 to C2</p><h1>Collocations & phrasal verbs</h1>
+  <p class="lede">Words that native speakers put together. Learn them in work sentences, test yourself, then use them in your own words. Phrases you miss come back sooner.</p></header>
+  <section class="panel">
+    <div class="lv-row" role="radiogroup" aria-label="Level">${LEVELS.map(lv => { const all = PHR.filter(p => p.lv === lv), done = all.filter(isMastered).length; return `<button class="lv-chip${lv === phrState.lv ? " on" : ""}" role="radio" aria-checked="${lv === phrState.lv}" data-lv="${lv}"><span class="lv-big">${lv}</span><span class="lv-sub">${LEVEL_NOTE[lv]}</span><span class="lv-bar"><span style="width:${Math.round(100 * done / all.length)}%"></span></span><span class="lv-sub">${done} / ${all.length} mastered</span></button>`; }).join("")}</div>
+    <div class="row" style="margin-top:14px">
+      <span class="seg-ctl" role="radiogroup" aria-label="Type">${[["all", "Both"], ["c", "Collocations"], ["p", "Phrasal verbs"]].map(([k, l]) => `<button role="radio" aria-checked="${phrState.kind === k}" data-kind="${k}">${l}</button>`).join("")}</span>
+      <span class="spacer"></span>
+      ${due ? `<span class="pill due">${due} due for review</span>` : ""}
+    </div>
+  </section>
+  <div class="tabs" role="tablist">${[["learn", "Learn"], ["quiz", "Practise"], ["use", "Use it"]].map(([k, l], i) => `<button role="tab" aria-selected="${phrState.tab === k}" data-ptab="${k}"><span>${i + 1}</span>${l}</button>`).join("")}</div>
+  <div id="ppane" class="stack"></div>`;
+  app.querySelectorAll("[data-lv]").forEach(b => b.onclick = () => { phrState.lv = b.dataset.lv; phrState.quiz = null; phrState.use = null; renderPhrases(); });
+  app.querySelectorAll("[data-kind]").forEach(b => b.onclick = () => { phrState.kind = b.dataset.kind; phrState.quiz = null; phrState.use = null; renderPhrases(); });
+  app.querySelectorAll("[data-ptab]").forEach(b => b.onclick = () => { phrState.tab = b.dataset.ptab; renderPhrases(); });
+  const pane = $("#ppane");
+  if(phrState.tab === "learn") phrLearn(items, pane);
+  else if(phrState.tab === "quiz") phrQuiz(items, pane);
+  else phrUse(items, pane);
+  wireSpeak(app);
+}
+function phrLearn(items, pane){
+  pane.innerHTML = `<ul class="phr-list">${items.map(p => `<li class="phr">
+      <div class="phr-top"><b class="phr-ph">${esc(p.ph)}</b><span class="pill k-${p.k}">${kindName(p.k)}</span>${dots3(p)}</div>
+      <p class="phr-m">${esc(p.m)}</p>
+      <p class="frame-inline phr-ex">${exHTML(p)}</p>
+      ${listenHTML(p.ex)}
+    </li>`).join("")}</ul>
+    <div class="next-row"><button class="btn primary" id="p-go-quiz">Test yourself on these →</button></div>`;
+  $("#p-go-quiz", pane).onclick = () => { phrState.tab = "quiz"; phrState.quiz = null; renderPhrases(); window.scrollTo({top:0, behavior:"smooth"}); };
+}
+function buildPhrQuiz(items){
+  const now = Date.now(), st = p => S.phr[p.id] || {box:0, due:0};
+  const dueI = shuffle(items.filter(p => st(p).box > 0 && st(p).due <= now));
+  const fresh = shuffle(items.filter(p => !st(p).box));
+  const rest = items.filter(p => st(p).box > 0 && st(p).due > now).sort((a, b) => st(a).box - st(b).box);
+  const pick = [...dueI, ...fresh, ...rest].slice(0, 10);
+  return shuffle(pick).map(p => {
+    if(Math.random() < 0.3){
+      const others = shuffle(PHR.filter(o => o.id !== p.id && o.lv === p.lv && o.k === p.k)).slice(0, 2).map(o => o.m);
+      return {p, type:"meaning", right:p.m, opts:shuffle([p.m, ...others])};
+    }
+    return {p, type:"gap", right:p.a, opts:shuffle([p.a, ...p.d])};
+  });
+}
+function phrMark(p, ok){
+  const s = PS(p.id);
+  if(ok){ s.r = (+s.r || 0) + 1; s.box = Math.min(6, (+s.box || 0) + 1); }
+  else { s.w = (+s.w || 0) + 1; s.box = 1; }
+  s.due = Date.now() + INTERVALS[s.box] * DAY;
+  persist();
+}
+function phrQuiz(items, pane){
+  let q = phrState.quiz;
+  if(!q || q.lv !== phrState.lv || q.kind !== phrState.kind) q = phrState.quiz = {lv:phrState.lv, kind:phrState.kind, qs:buildPhrQuiz(items), i:0, score:0, answered:false, missed:[]};
+  if(!q.qs.length){ pane.innerHTML = '<div class="panel">No phrases here yet.</div>'; return; }
+  if(q.i >= q.qs.length){
+    pane.innerHTML = `<section class="panel"><p class="qtype">Round complete</p><p class="done-score">${q.score} / ${q.qs.length}</p>
+      ${q.missed.length ? `<h3 class="h4">Review these</h3><ul class="phr-miss">${q.missed.map(p => `<li><b>${esc(p.ph)}</b> <span class="muted">· ${esc(p.m)}</span><br><span class="frame-inline">${esc(p.ex)}</span></li>`).join("")}</ul>` : '<p class="muted">Every answer right. These phrases will come back for review later.</p>'}
+      <div class="row" style="margin-top:16px"><button class="btn" id="pq-again">Another round</button><button class="btn primary" id="pq-use">Use ${q.missed.length ? "the ones you missed" : "them"} in sentences →</button></div></section>`;
+    $("#pq-again", pane).onclick = () => { phrState.quiz = null; renderPhrases(); };
+    $("#pq-use", pane).onclick = () => { phrState.use = {items:(q.missed.length ? q.missed : q.qs.map(x => x.p)).slice(0, 3)}; phrState.tab = "use"; renderPhrases(); };
+    return;
+  }
+  const cur = q.qs[q.i], p = cur.p;
+  pane.innerHTML = `<section class="panel">
+    <div class="dots" aria-hidden="true">${q.qs.map((_, k) => `<span class="dot ${k < q.i ? "done" : ""} ${k === q.i ? "cur" : ""}"></span>`).join("")}<span class="muted">Question ${q.i + 1} of ${q.qs.length}</span></div>
+    ${cur.type === "gap"
+      ? `<p class="qtype">${p.k === "c" ? "Complete the collocation" : "Complete the phrasal verb"}</p><p class="qtext frame-inline">${blankedHTML(p)}</p>`
+      : `<p class="qtype">What does it mean?</p><p class="qtext"><b>${esc(p.ph)}</b></p>`}
+    <div class="opts">${cur.opts.map(o => `<button class="opt" data-o="${esc(o)}">${esc(o)}</button>`).join("")}</div>
+    <div id="pqfb" class="qfb" aria-live="polite"></div>
+    <div class="next-row" style="margin-top:18px"><button class="btn primary" id="pq-next" disabled>${q.i + 1 === q.qs.length ? "See result" : "Next question"} →</button></div>
+  </section>`;
+  const fb = $("#pqfb", pane), nx = $("#pq-next", pane);
+  pane.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+    if(q.answered) return;
+    q.answered = true;
+    const ok = b.dataset.o === cur.right;
+    pane.querySelectorAll(".opt").forEach(x => { x.disabled = true; if(x.dataset.o === cur.right) x.classList.add("right"); });
+    if(!ok){ b.classList.add("wrong"); q.missed.push(p); } else q.score++;
+    phrMark(p, ok);
+    fb.className = "qfb " + (ok ? "ok" : "no");
+    fb.innerHTML = `<b>${ok ? "Correct." : "Not quite."}</b> <b>${esc(p.ph)}</b>: ${esc(p.m)}.<p class="frame-inline" style="margin:8px 0">${exHTML(p)}</p>${listenHTML(p.ex)}`;
+    wireSpeak(fb);
+    nx.disabled = false; nx.focus();
+  });
+  nx.onclick = () => { q.i++; q.answered = false; renderPhrases(); };
+}
+function usePrompt(items, text){
+  return `You are an English coach for a C1-level professional. They are practising these ${items.length} expressions:
+${items.map(p => `- "${p.ph}" (${kindName(p.k).toLowerCase()}, ${p.lv}): ${p.m}`).join("\n")}
+
+They wrote or dictated (speech-to-text, so ignore punctuation and capitals):
+"""${text}"""
+
+For each expression, check whether they used it, and whether the form, grammar and meaning are correct and natural in context. Then rewrite the whole text naturally, using all the expressions correctly.
+Return ONLY JSON with exactly this shape:
+{"items":[{"phrase":"<expression>","used":true|false,"correct":true|false,"comment":"<max 20 words>","better":"<a corrected or model sentence using it>"}],
+ "natural":"<the full text rewritten naturally by a native professional, same ideas>",
+ "tip":"<one short tip>"}`;
+}
+function phrUse(items, pane){
+  if(!phrState.use || !phrState.use.items || !phrState.use.items.length || phrState.use.items.some(p => !items.includes(p) && p.lv !== phrState.lv)){
+    const weak = items.filter(p => { const s = S.phr[p.id]; return s && s.box > 0 && s.box < 3; });
+    phrState.use = {items:shuffle(weak.length >= 3 ? weak : items).slice(0, 3)};
+  }
+  const U = phrState.use;
+  pane.innerHTML = `<section class="panel">
+    <p class="qtype">Use it</p>
+    <p class="task" style="margin-bottom:12px">Write or say 2 to 4 sentences about your own work that use all three expressions.</p>
+    <ul class="use-list">${U.items.map(p => `<li><b>${esc(p.ph)}</b> <span class="pill k-${p.k}">${kindName(p.k)}</span><br><span class="muted">${esc(p.m)}</span></li>`).join("")}</ul>
+    <label for="use-in" class="lbl" style="margin-top:14px">Your sentences</label>
+    <textarea id="use-in" rows="5" placeholder="Speak with the microphone or type here.">${esc(U.text || "")}</textarea>
+    <div class="row">
+      <button class="btn" id="use-new" type="button">Different phrases</button>
+      <span class="spacer"></span>
+      <button class="btn mic-btn" id="use-mic" type="button">${MIC_SVG}<span>Speak</span></button>
+      <button class="btn primary ai-only" id="use-check" type="button">Check with coach</button>
+    </div>
+    <p class="muted no-ai-note" style="margin:10px 0 0">Add your Claude API key in <a href="#settings">Settings</a> so the coach can check your sentences.</p>
+  </section>
+  <div id="use-out"></div>`;
+  const ta = $("#use-in", pane), out = $("#use-out", pane), mic = $("#use-mic", pane);
+  if(U.result) out.innerHTML = useResultHTML(U.result);
+  ta.addEventListener("input", () => { U.text = ta.value; });
+  $("#use-new", pane).onclick = () => { phrState.use = null; renderPhrases(); };
+  if(!SR) mic.remove();
+  else mic.onclick = () => {
+    if(Mic.active && Mic.owner === mic){ micStop(false); return; }
+    try{ speechSynthesis.cancel(); }catch(e){}
+    micStart({owner:mic, base:ta.value.trim(), autoSendMs:0,
+      onUpdate:() => { ta.value = (Mic.text + " " + Mic.interim).trim(); U.text = ta.value; mic.classList.toggle("listening", Mic.active); mic.lastChild.textContent = Mic.active ? "Stop" : "Speak"; },
+      onDone:(t, s, conf, err) => { ta.value = t; U.text = t; mic.classList.remove("listening"); mic.lastChild.textContent = "Speak"; if(err) out.innerHTML = `<div class="panel err">${esc(micErrText(err))}</div>`; }});
+  };
+  $("#use-check", pane).onclick = async () => {
+    const text = ta.value.trim();
+    if(wordsOf(text).length < 6){ out.innerHTML = '<div class="panel err">Write at least one full sentence first.</div>'; return; }
+    if(Mic.active) micStop(false);
+    const btn = $("#use-check", pane); btn.disabled = true;
+    out.innerHTML = '<section class="panel"><p class="muted" style="margin:0">Your coach is checking…</p></section>';
+    try{
+      const v = await askJSON(usePrompt(U.items, text));
+      U.result = v;
+      arr(v.items).forEach(it => { const p = U.items.find(x => x.ph.toLowerCase() === String(it.phrase || "").toLowerCase()); if(p && it.used) phrMark(p, !!it.correct); });
+      out.innerHTML = useResultHTML(v); wireSpeak(out);
+    }catch(e){ out.innerHTML = `<div class="panel err">${esc(aiError(e).replace("Your partner didn't answer", "The coach couldn't check this"))}</div>`; }
+    finally{ btn.disabled = false; }
+  };
+}
+function useResultHTML(v){
+  return `<section class="panel">
+    <h2 class="h3">Coach feedback</h2>
+    <ul class="steps-check">${arr(v.items).map((it, i) => `<li class="${it.used && it.correct ? "ok" : "miss"}" style="--c:var(--s${i % 5})"><span class="mark">${it.used && it.correct ? "✓" : "–"}</span><b>${esc(it.phrase)}</b> <span class="muted">· ${it.used ? (it.correct ? "used well" : "used, needs a fix") : "not used"}</span>${it.comment ? `<br>${esc(it.comment)}` : ""}${it.better ? `<br><span class="frame-inline">${esc(it.better)}</span>` : ""}</li>`).join("")}</ul>
+    ${v.natural ? `<h3 class="h4">Natural version</h3><p class="frame-inline sayback">${pronHTML(String(v.natural).replace(/[\[\]]/g, ""))}</p>${listenHTML(String(v.natural), "Hear it")}` : ""}
+    ${v.tip ? `<p class="note"><b>Tip:</b> ${esc(v.tip)}</p>` : ""}
+  </section>`;
+}
+
 /* ---------------- AI partner ---------------- */
 const SCEN = [
  {id:"release", name:"Weekly releases debate", who:"Sarah", role:"your engineering manager", desc:"Sarah wants to move the team from monthly to weekly releases next month. She is open to arguments but needs convincing either way.", goal:"Give a well-supported opinion and push back diplomatically.", cards:["A","B","F"], open:"So, I'm thinking we move to weekly releases starting next month. What's your take?"},
@@ -1897,6 +2236,7 @@ function route(){
   if(h === "radar") return renderRadar();
   if(h === "partner") return renderPartner();
   if(h === "settings") return renderSettings();
+  if(h === "phrases") return renderPhrases();
   renderLibrary();
 }
 window.addEventListener("hashchange", () => { try{ speechSynthesis.cancel(); }catch(e){} if(Mic.active) micStop(false); route(); window.scrollTo(0, 0); });
