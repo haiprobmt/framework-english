@@ -1,4 +1,4 @@
-# FrameWork English
+# Fluent at Work
 
 A phone app for C1-level professional English: sentence frames for meetings, presentations and emails, IPA pronunciation under every word, spaced review, a repetition radar, and an AI conversation partner you can talk to out loud.
 

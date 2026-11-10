@@ -1,7 +1,7 @@
 {
-  "name": "FrameWork English",
-  "short_name": "FrameWork",
-  "description": "Sentence frames, pronunciation and an AI conversation partner for professional English.",
+  "name": "Fluent at Work",
+  "short_name": "Fluent@Work",
+  "description": "Speak confident, natural English at work: sentence frames, phrases, pronunciation and an AI conversation partner.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

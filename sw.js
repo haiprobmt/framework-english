@@ -1,6 +1,6 @@
-/* FrameWork English service worker: keeps the app shell available offline.
+/* Fluent at Work service worker: keeps the app shell available offline.
    Bump CACHE when you publish a new version. */
-const CACHE = "framework-english-v5";
+const CACHE = "framework-english-v6";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icons/icon-192.png", "./icons/icon-512.png", "./icons/maskable-512.png"];
 
 self.addEventListener("install", e => {
